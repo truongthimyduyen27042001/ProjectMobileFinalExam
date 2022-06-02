@@ -1,56 +1,68 @@
 package com.midterm.reviewfilmproject;
 
-import androidx.annotation.NonNull;
-import androidx.annotation.Nullable;
-import androidx.appcompat.app.AppCompatActivity;
-import androidx.recyclerview.widget.GridLayoutManager;
-import androidx.recyclerview.widget.LinearLayoutManager;
-
 import android.os.Bundle;
-import android.view.View;
-import android.widget.Adapter;
+import android.view.MenuItem;
 
-import com.midterm.reviewfilmproject.databinding.ActivityMainBinding;
+import androidx.annotation.NonNull;
+import androidx.appcompat.app.ActionBar;
+import androidx.appcompat.app.AppCompatActivity;
+import androidx.fragment.app.Fragment;
+import androidx.fragment.app.FragmentTransaction;
 
-import java.util.ArrayList;
-import java.util.Collection;
-import java.util.Iterator;
-import java.util.List;
-import java.util.ListIterator;
+import com.google.android.material.bottomnavigation.BottomNavigationView;
+
 
 public class MainActivity extends AppCompatActivity {
 
-    ActivityMainBinding binding;
-    private List<film> listFilms;
-    private filmAdapter filmAdapter;
-
-
-
+    private ActionBar toolbar;
+    private Fragment fragment;
     @Override
     protected void onCreate(Bundle savedInstanceState) {
         super.onCreate(savedInstanceState);
-        binding = ActivityMainBinding.inflate(getLayoutInflater());
-        View view = binding.getRoot();
-        setContentView(view);
+        setContentView(R.layout.activity_main);
 
-        film f = new film(1,"Phòng chat thứ n",2022,"Đây là một bộ phim xuất phát từ hàn quốc");
-        film f1 = new film(2,"Phòng chat thứ n1",2022,"Đây là một bộ phim xuất phát từ Việt Nam");
-        film f2 = new film(3,"Phòng chat thứ n2",2022,"Đây là một bộ phim xuất phát từ Nhật Bản");
-        film f3 = new film(4,"Phòng chat thứ n3",2022,"Đây là một bộ phim xuất phát từ Trung Quốc");
+        toolbar = getSupportActionBar();
 
-        listFilms = new ArrayList<film>();
-        listFilms.add(f);
-        listFilms.add(f1);
-        listFilms.add(f2);
-        listFilms.add(f3);
+        BottomNavigationView navigation = (BottomNavigationView) findViewById(R.id.navigation);
+        navigation.setOnNavigationItemSelectedListener(mOnNavigationItemSelectedListener);
 
-        filmAdapter = new filmAdapter(this, listFilms);
+        toolbar.setTitle("Films");
+        fragment = new StoreFragment();
+        loadFragment(fragment);
+    }
 
-        LinearLayoutManager layoutManager
-                = new LinearLayoutManager(this, LinearLayoutManager.HORIZONTAL, false);
+    private BottomNavigationView.OnNavigationItemSelectedListener mOnNavigationItemSelectedListener
+            = new BottomNavigationView.OnNavigationItemSelectedListener() {
 
-        binding.rcvFilms.setLayoutManager(layoutManager);
-        binding.rcvFilms.setAdapter(filmAdapter);
+        @Override
+        public boolean onNavigationItemSelected(@NonNull MenuItem item) {
+            Fragment fragment;
+            switch (item.getItemId()) {
+                case R.id.navigation_shop:
+                    toolbar.setTitle("Films");
+                    fragment = new StoreFragment();
+                    loadFragment(fragment);
+                    return true;
+                case R.id.navigation_gifts:
+                    toolbar.setTitle("My Favorite Films");
+                    fragment = new GiftsFragment();
+                    loadFragment(fragment);
+                    return true;
+                case R.id.navigation_profile:
+                    toolbar.setTitle("Profile");
+                    fragment = new ProfileFragment();
+                    loadFragment(fragment);
+                    return true;
+            }
 
+            return false;
+        }
+    };
+    private void loadFragment(Fragment fragment) {
+        // load fragment
+        FragmentTransaction transaction = getSupportFragmentManager().beginTransaction();
+        transaction.replace(R.id.frame_container, fragment);
+        transaction.addToBackStack(null);
+        transaction.commit();
     }
 }

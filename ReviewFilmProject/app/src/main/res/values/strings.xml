@@ -1,3 +1,8 @@
 <resources>
     <string name="app_name">ReviewFilmProject</string>
+    <string name="title_films">Films</string>
+    <string name="title_favorite">Favorite</string>
+    <string name="title_profile">Profile</string>
+    <!-- TODO: Remove or change this placeholder text -->
+    <string name="hello_blank_fragment">Nguyen Van Tien</string>
 </resources>

@@ -7,12 +7,14 @@ public class film implements Serializable {
     private String name;
     private int year;
     private String desc;
+    private boolean isFavorite;
 
-    public film(int id, String name, int year, String desc) {
+    public film(int id, String name, int year, String desc, boolean isFavorite) {
         this.id = id;
         this.name = name;
         this.year = year;
         this.desc = desc;
+        this.isFavorite = isFavorite;
     }
 
     public int getId() {
@@ -45,5 +47,13 @@ public class film implements Serializable {
 
     public void setDesc(String desc) {
         this.desc = desc;
+    }
+
+    public boolean isFavorite() {
+        return isFavorite;
+    }
+
+    public void setFavorite(boolean favorite) {
+        isFavorite = favorite;
     }
 }
