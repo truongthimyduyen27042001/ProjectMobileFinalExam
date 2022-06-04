@@ -46,6 +46,8 @@ public class OverViewFilmsFragment extends Fragment {
     FirebaseFirestore db;
     // Action film
 
+    List<FilmsModel> filmsModelListTrend;
+    FilmsAdapter filmsAdapterTrend;
     List<FilmsModel> filmsModelList;
     FilmsAdapter filmsAdapter;
     List<FilmsModel> filmsModelList2;
@@ -61,12 +63,12 @@ public class OverViewFilmsFragment extends Fragment {
     @Override
     public View onCreateView(LayoutInflater inflater, ViewGroup container,
                              Bundle savedInstanceState) {
-
-
         // Inflate the layout for this fragment
         binding = FragmentOverViewFilmsBinding.inflate(inflater, container, false);
         View view = binding.getRoot();
         db = FirebaseFirestore.getInstance();
+
+        TrendRec = binding.rcvFilmsTrend;
         ActionRec = binding.rcvActionFilms;
         AnimeRec = binding.rcvAnimeFilms;
         RomanRec = binding.rcvRomanticFilms;
@@ -82,6 +84,11 @@ public class OverViewFilmsFragment extends Fragment {
 //        actionFilmsModelList = new ArrayList<>();
 //        actionFilmsAdapter = new ActionFilmsAdapter(getActivity(),actionFilmsModelList);
 //        ActionRec.setAdapter(actionFilmsAdapter);
+
+        TrendRec.setLayoutManager(new LinearLayoutManager(getActivity(), RecyclerView.HORIZONTAL, false));
+        filmsModelListTrend = new ArrayList<>();
+        filmsAdapterTrend = new FilmsAdapter(getActivity(), filmsModelListTrend);
+        TrendRec.setAdapter(filmsAdapterTrend);
 
         ActionRec.setLayoutManager(new LinearLayoutManager(getActivity(),RecyclerView.HORIZONTAL,false));
         filmsModelList = new ArrayList<>();
@@ -107,7 +114,7 @@ public class OverViewFilmsFragment extends Fragment {
         filmsModelList5 = new ArrayList<>();
         filmsAdapter5 = new FilmTrendAdapter(getActivity(),filmsModelList5);
         TrendRec.setAdapter(filmsAdapter5);
-
+      
         db.collection("Films").whereEqualTo("type", "Action movie")
                 .get()
                 .addOnCompleteListener(new OnCompleteListener<QuerySnapshot>() {
