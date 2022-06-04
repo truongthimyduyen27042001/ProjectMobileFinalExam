@@ -99,7 +99,7 @@ public class OverViewFilmsFragment extends Fragment {
         filmsAdapter4 = new FilmsAdapter(getActivity(),filmsModelList4);
         HorrorRec.setAdapter(filmsAdapter4);
 
-        db.collection("Films").whereEqualTo("type", "action")
+        db.collection("Films").whereEqualTo("type", "Action movie")
                 .get()
                 .addOnCompleteListener(new OnCompleteListener<QuerySnapshot>() {
                     @Override
@@ -119,7 +119,7 @@ public class OverViewFilmsFragment extends Fragment {
                     }
                 });
 
-        db.collection("Films").whereEqualTo("type", "anime")
+        db.collection("Films").whereEqualTo("type", "Horror movie")
                 .get()
                 .addOnCompleteListener(new OnCompleteListener<QuerySnapshot>() {
                     @Override
@@ -137,7 +137,7 @@ public class OverViewFilmsFragment extends Fragment {
                     }
                 });
 
-        db.collection("Films").whereEqualTo("type", "horror")
+        db.collection("Films").whereEqualTo("type", "Horror movie")
                 .get()
                 .addOnCompleteListener(new OnCompleteListener<QuerySnapshot>() {
                     @Override
@@ -155,7 +155,7 @@ public class OverViewFilmsFragment extends Fragment {
                     }
                 });
 
-        db.collection("Films").whereEqualTo("type", "roman")
+        db.collection("Films").whereEqualTo("type", "Horror movie")
                 .get()
                 .addOnCompleteListener(new OnCompleteListener<QuerySnapshot>() {
                     @Override
@@ -187,8 +187,6 @@ public class OverViewFilmsFragment extends Fragment {
                         .commit();
             }
         });
-
-
 
         return view;
     }

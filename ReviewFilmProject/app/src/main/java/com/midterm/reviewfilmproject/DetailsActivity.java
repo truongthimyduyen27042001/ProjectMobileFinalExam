@@ -26,10 +26,6 @@ public class DetailsActivity extends AppCompatActivity {
         super.onCreate(savedInstanceState);
         setContentView(R.layout.activity_details);
 
-//        toolbar = findViewById(R.id.toolbar);
-//        setSupportActionBar(toolbar);
-//        getSupportActionBar().setDisplayHomeAsUpEnabled(true);
-
         final Object object = getIntent().getSerializableExtra("detail");
         Log.d("OK", String.valueOf(object));
         if( object instanceof FilmsModel){
@@ -49,7 +45,6 @@ public class DetailsActivity extends AppCompatActivity {
             desc.setText(filmsModel.getDesc());
             year.setText(filmsModel.getYear());
         }
-
         play = findViewById(R.id.play);
         play.setOnClickListener(new View.OnClickListener() {
             @Override

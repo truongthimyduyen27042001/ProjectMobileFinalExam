@@ -8,28 +8,25 @@ public class FilmsModel implements Serializable {
     String type;
     String desc;
     String year;
-    String video_url;
+    String video;
 
     public FilmsModel() {
     }
 
-
-
-
-    public FilmsModel(String name, String img_url, String type, String desc, String year, String video_url) {
+    public FilmsModel(String name, String img_url, String type, String desc, String year, String video) {
         this.name = name;
         this.img_url = img_url;
         this.type = type;
         this.desc = desc;
         this.year = year;
-        this.video_url = video_url;
+        this.video = video;
     }
-    public String getVideo_url() {
-        return video_url;
+    public String getVideo() {
+        return video;
     }
 
-    public void setVideo_url(String video_url) {
-        this.video_url = video_url;
+    public void setVideo(String video) {
+        this.video = video;
     }
     public String getYear() {
         return year;

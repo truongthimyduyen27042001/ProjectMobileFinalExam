@@ -37,15 +37,12 @@ public class FilmsAdapter extends RecyclerView.Adapter<FilmsAdapter.ViewHolder> 
     public void onBindViewHolder(@NonNull ViewHolder holder, @SuppressLint("RecyclerView") int position) {
         Glide.with(context).load(filmsModelList.get(position).getImg_url()).into(holder.actionImg);
         holder.name.setText(filmsModelList.get(position).getName());
-//        holder.type.setText(filmsModelList.get(position).getType());
-//        holder.desc.setText(filmsModelList.get(position).getDesc());
         holder.itemView.setOnClickListener(new View.OnClickListener() {
             @Override
             public void onClick(View view) {
                 Intent intent = new Intent(context,DetailsActivity.class);
                 intent.putExtra("detail",filmsModelList.get(position));
                 context.startActivity(intent);
-                Log.d("OK", String.valueOf(filmsModelList.get(position)));
             }
         });
 
@@ -63,8 +60,6 @@ public class FilmsAdapter extends RecyclerView.Adapter<FilmsAdapter.ViewHolder> 
             super(itemView);
             actionImg = itemView.findViewById(R.id.imv_posterFilm);
             name = itemView.findViewById(R.id.tv_nameFilm);
-//            type = itemView.findViewById(R.id.tv_typeFilm);
-//            desc = itemView.findViewById(R.id.tv_descFilm);
         }
     }
 }
