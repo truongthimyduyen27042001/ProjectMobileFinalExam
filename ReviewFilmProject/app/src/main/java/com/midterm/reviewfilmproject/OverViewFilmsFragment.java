@@ -42,9 +42,12 @@ public class OverViewFilmsFragment extends Fragment {
     RecyclerView AnimeRec;
     RecyclerView RomanRec;
     RecyclerView HorrorRec;
+    RecyclerView TrendRec;
     FirebaseFirestore db;
     // Action film
 
+    List<FilmsModel> filmsModelListTrend;
+    FilmsAdapter filmsAdapterTrend;
     List<FilmsModel> filmsModelList;
     FilmsAdapter filmsAdapter;
     List<FilmsModel> filmsModelList2;
@@ -58,12 +61,12 @@ public class OverViewFilmsFragment extends Fragment {
     @Override
     public View onCreateView(LayoutInflater inflater, ViewGroup container,
                              Bundle savedInstanceState) {
-
-
         // Inflate the layout for this fragment
         binding = FragmentOverViewFilmsBinding.inflate(inflater, container, false);
         View view = binding.getRoot();
         db = FirebaseFirestore.getInstance();
+
+        TrendRec = binding.rcvFilmsTrend;
         ActionRec = binding.rcvActionFilms;
         AnimeRec = binding.rcvAnimeFilms;
         RomanRec = binding.rcvRomanticFilms;
@@ -78,6 +81,11 @@ public class OverViewFilmsFragment extends Fragment {
 //        actionFilmsModelList = new ArrayList<>();
 //        actionFilmsAdapter = new ActionFilmsAdapter(getActivity(),actionFilmsModelList);
 //        ActionRec.setAdapter(actionFilmsAdapter);
+
+        TrendRec.setLayoutManager(new LinearLayoutManager(getActivity(), RecyclerView.HORIZONTAL, false));
+        filmsModelListTrend = new ArrayList<>();
+        filmsAdapterTrend = new FilmsAdapter(getActivity(), filmsModelListTrend);
+        TrendRec.setAdapter(filmsAdapterTrend);
 
         ActionRec.setLayoutManager(new LinearLayoutManager(getActivity(),RecyclerView.HORIZONTAL,false));
         filmsModelList = new ArrayList<>();
@@ -98,6 +106,26 @@ public class OverViewFilmsFragment extends Fragment {
         filmsModelList4 = new ArrayList<>();
         filmsAdapter4 = new FilmsAdapter(getActivity(),filmsModelList4);
         HorrorRec.setAdapter(filmsAdapter4);
+
+        db.collection("Films").whereEqualTo("istrending", true)
+                .get()
+                .addOnCompleteListener(new OnCompleteListener<QuerySnapshot>() {
+                    @Override
+                    public void onComplete(@NonNull Task<QuerySnapshot> task) {
+                        if(task.isSuccessful()){
+                            for (QueryDocumentSnapshot document : task.getResult()){
+                                FilmsModel filmsModel = document.toObject(FilmsModel.class);
+                                filmsModelListTrend.add(filmsModel);
+                                filmsAdapterTrend.notifyDataSetChanged();
+
+                                progressBar.setVisibility(View.GONE);
+                                scrollView.setVisibility(View.VISIBLE);
+                            }
+                        } else {
+                            Toast.makeText(getActivity(), "ERROR"+task.getException(), Toast.LENGTH_SHORT).show();
+                        }
+                    }
+                });
 
         db.collection("Films").whereEqualTo("type", "Action movie")
                 .get()
