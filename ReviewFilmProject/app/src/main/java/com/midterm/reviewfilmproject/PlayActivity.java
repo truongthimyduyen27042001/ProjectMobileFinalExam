@@ -23,7 +23,7 @@ public class PlayActivity extends AppCompatActivity {
         }
 
         VideoView videoView =(VideoView)findViewById(R.id.videoView1);
-        videoView.setVideoURI(Uri.parse(filmsModel.getVideo_url()));
+        videoView.setVideoURI(Uri.parse(filmsModel.getVideo()));
         videoView.setMediaController(new MediaController(this));
         videoView.requestFocus();
         videoView.start();
