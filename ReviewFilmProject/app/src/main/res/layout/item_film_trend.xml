@@ -19,6 +19,7 @@
             android:layout_gravity="center"
             tools:ignore="MissingConstraints">
             <ImageView
+
                 android:layout_width="match_parent"
                 android:layout_height="80dp"
                 android:src="@drawable/hjduyen"
@@ -43,6 +44,7 @@
             android:layout_gravity="center"
             tools:ignore="MissingConstraints">
             <ImageView
+                android:id="@+id/imv_posterFilm"
                 android:layout_width="match_parent"
                 android:layout_height="80dp"
                 android:src="@drawable/hjduyen"

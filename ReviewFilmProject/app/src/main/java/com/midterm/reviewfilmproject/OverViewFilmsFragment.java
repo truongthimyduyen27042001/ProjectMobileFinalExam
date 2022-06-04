@@ -42,6 +42,7 @@ public class OverViewFilmsFragment extends Fragment {
     RecyclerView AnimeRec;
     RecyclerView RomanRec;
     RecyclerView HorrorRec;
+    RecyclerView TrendRec;
     FirebaseFirestore db;
     // Action film
 
@@ -53,6 +54,8 @@ public class OverViewFilmsFragment extends Fragment {
     FilmsAdapter filmsAdapter3;
     List<FilmsModel> filmsModelList4;
     FilmsAdapter filmsAdapter4;
+    List<FilmsModel> filmsModelList5;
+    FilmTrendAdapter filmsAdapter5;
 
 
     @Override
@@ -70,6 +73,7 @@ public class OverViewFilmsFragment extends Fragment {
         HorrorRec = binding.rcvHorrifiedFilms;
         scrollView = binding.scrollView;
         progressBar = binding.progressbar;
+        TrendRec =   binding.rcvFilmsTrend;
 
         progressBar.setVisibility(View.VISIBLE);
         scrollView.setVisibility(View.GONE);
@@ -99,6 +103,11 @@ public class OverViewFilmsFragment extends Fragment {
         filmsAdapter4 = new FilmsAdapter(getActivity(),filmsModelList4);
         HorrorRec.setAdapter(filmsAdapter4);
 
+        TrendRec.setLayoutManager(new LinearLayoutManager(getActivity(),RecyclerView.HORIZONTAL,false));
+        filmsModelList5 = new ArrayList<>();
+        filmsAdapter5 = new FilmTrendAdapter(getActivity(),filmsModelList5);
+        TrendRec.setAdapter(filmsAdapter5);
+
         db.collection("Films").whereEqualTo("type", "Action movie")
                 .get()
                 .addOnCompleteListener(new OnCompleteListener<QuerySnapshot>() {
@@ -119,7 +128,7 @@ public class OverViewFilmsFragment extends Fragment {
                     }
                 });
 
-        db.collection("Films").whereEqualTo("type", "Horror movie")
+        db.collection("Films").whereEqualTo("type", "Anime movie")
                 .get()
                 .addOnCompleteListener(new OnCompleteListener<QuerySnapshot>() {
                     @Override
@@ -147,7 +156,6 @@ public class OverViewFilmsFragment extends Fragment {
                                 FilmsModel filmsModel3 = document.toObject(FilmsModel.class);
                                 filmsModelList4.add(filmsModel3);
                                 filmsAdapter4.notifyDataSetChanged();
-
                             }
                         } else {
                             Toast.makeText(getActivity(), "ERROR"+task.getException(), Toast.LENGTH_SHORT).show();
@@ -155,7 +163,7 @@ public class OverViewFilmsFragment extends Fragment {
                     }
                 });
 
-        db.collection("Films").whereEqualTo("type", "Horror movie")
+        db.collection("Films").whereEqualTo("type", "Romantic movie")
                 .get()
                 .addOnCompleteListener(new OnCompleteListener<QuerySnapshot>() {
                     @Override
@@ -165,6 +173,23 @@ public class OverViewFilmsFragment extends Fragment {
                                 FilmsModel filmsModel4 = document.toObject(FilmsModel.class);
                                 filmsModelList3.add(filmsModel4);
                                 filmsAdapter3.notifyDataSetChanged();
+                            }
+                        } else {
+                            Toast.makeText(getActivity(), "ERROR"+task.getException(), Toast.LENGTH_SHORT).show();
+                        }
+                    }
+                });
+
+        db.collection("Films").whereEqualTo("istrending", true)
+                .get()
+                .addOnCompleteListener(new OnCompleteListener<QuerySnapshot>() {
+                    @Override
+                    public void onComplete(@NonNull Task<QuerySnapshot> task) {
+                        if(task.isSuccessful()){
+                            for (QueryDocumentSnapshot document : task.getResult()){
+                                FilmsModel filmsModel5 = document.toObject(FilmsModel.class);
+                                filmsModelList5.add(filmsModel5);
+                                filmsAdapter5.notifyDataSetChanged();
                             }
                         } else {
                             Toast.makeText(getActivity(), "ERROR"+task.getException(), Toast.LENGTH_SHORT).show();

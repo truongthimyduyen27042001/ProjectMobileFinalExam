@@ -4,7 +4,9 @@ import android.os.Bundle;
 import android.view.LayoutInflater;
 import android.view.View;
 import android.view.ViewGroup;
+import android.widget.TextView;
 
+import androidx.core.view.ViewCompat;
 import androidx.fragment.app.Fragment;
 import androidx.fragment.app.FragmentManager;
 
@@ -15,12 +17,7 @@ import java.util.List;
 public class StoreFragment extends Fragment {
 
     private FragmentStoreBinding binding;
-    private List<film> listFilms;
-    private filmAdapter filmAdapter;
-    private filmTrendAdapter filmTrendAdapter;
-    private List<film> listTrendFilms;
     public StoreFragment() {
-        // Required empty public constructor
     }
 
     public static StoreFragment newInstance(String param1, String param2) {
@@ -38,7 +35,6 @@ public class StoreFragment extends Fragment {
     @Override
     public View onCreateView(LayoutInflater inflater, ViewGroup container,
                              Bundle savedInstanceState) {
-        // Inflate the layout for this fragment
         binding = FragmentStoreBinding.inflate(inflater, container, false);
         View view = binding.getRoot();
 
@@ -67,12 +63,17 @@ public class StoreFragment extends Fragment {
         binding.tvActionFilms.setOnClickListener(new View.OnClickListener() {
             @Override
             public void onClick(View view) {
+                TextView typeFilm = binding.tvActionFilms;
                 SpecificFilmsFragment specificFilmsFragment = new SpecificFilmsFragment();
+                Bundle args = new Bundle();
+                args.putSerializable("type", "1");
+                specificFilmsFragment.setArguments(args);
                 FragmentManager fragmentManager = getActivity().getSupportFragmentManager();
 
                 fragmentManager.beginTransaction()
                         .replace(R.id.fragmentContainerView, specificFilmsFragment, null)
                         .setReorderingAllowed(true)
+
                         .addToBackStack(null) // name can be null
                         .commit();
             }
@@ -82,8 +83,10 @@ public class StoreFragment extends Fragment {
             @Override
             public void onClick(View view) {
                 SpecificFilmsFragment specificFilmsFragment = new SpecificFilmsFragment();
+                Bundle args = new Bundle();
+                args.putSerializable("type", "2");
+                specificFilmsFragment.setArguments(args);
                 FragmentManager fragmentManager = getActivity().getSupportFragmentManager();
-
                 fragmentManager.beginTransaction()
                         .replace(R.id.fragmentContainerView, specificFilmsFragment, null)
                         .setReorderingAllowed(true)
@@ -96,6 +99,9 @@ public class StoreFragment extends Fragment {
             @Override
             public void onClick(View view) {
                 SpecificFilmsFragment specificFilmsFragment = new SpecificFilmsFragment();
+                Bundle args = new Bundle();
+                args.putSerializable("type", "3");
+                specificFilmsFragment.setArguments(args);
                 FragmentManager fragmentManager = getActivity().getSupportFragmentManager();
 
                 fragmentManager.beginTransaction()
@@ -110,8 +116,10 @@ public class StoreFragment extends Fragment {
             @Override
             public void onClick(View view) {
                 SpecificFilmsFragment specificFilmsFragment = new SpecificFilmsFragment();
+                Bundle args = new Bundle();
+                args.putSerializable("type", "4");
+                specificFilmsFragment.setArguments(args);
                 FragmentManager fragmentManager = getActivity().getSupportFragmentManager();
-
                 fragmentManager.beginTransaction()
                         .replace(R.id.fragmentContainerView, specificFilmsFragment, null)
                         .setReorderingAllowed(true)

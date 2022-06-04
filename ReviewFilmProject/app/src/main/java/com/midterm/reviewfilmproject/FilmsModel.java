@@ -9,18 +9,29 @@ public class FilmsModel implements Serializable {
     String desc;
     String year;
     String video;
+    Boolean istrending;
 
     public FilmsModel() {
     }
 
-    public FilmsModel(String name, String img_url, String type, String desc, String year, String video) {
+    public FilmsModel(String name, String img_url, String type, String desc, String year, String video, Boolean istrending) {
         this.name = name;
         this.img_url = img_url;
         this.type = type;
         this.desc = desc;
         this.year = year;
         this.video = video;
+        this.istrending = istrending;
     }
+
+    public Boolean getIstrending() {
+        return istrending;
+    }
+
+    public void setIstrending(Boolean istrending) {
+        this.istrending = istrending;
+    }
+
     public String getVideo() {
         return video;
     }

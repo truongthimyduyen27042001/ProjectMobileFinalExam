@@ -3,7 +3,6 @@ package com.midterm.reviewfilmproject;
 import android.annotation.SuppressLint;
 import android.content.Context;
 import android.content.Intent;
-import android.util.Log;
 import android.view.LayoutInflater;
 import android.view.View;
 import android.view.ViewGroup;
@@ -17,12 +16,12 @@ import com.bumptech.glide.Glide;
 
 import java.util.List;
 
-public class FilmsAdapter extends RecyclerView.Adapter<FilmsAdapter.ViewHolder> {
+public class FilmTrendAdapter extends RecyclerView.Adapter<FilmTrendAdapter.ViewHolder> {
 
     private Context context;
     private List<FilmsModel> filmsModelList;
 
-    public FilmsAdapter(Context context, List<FilmsModel> filmsModelList) {
+    public FilmTrendAdapter(Context context, List<FilmsModel> filmsModelList) {
         this.context = context;
         this.filmsModelList = filmsModelList;
     }
@@ -30,13 +29,12 @@ public class FilmsAdapter extends RecyclerView.Adapter<FilmsAdapter.ViewHolder> 
     @NonNull
     @Override
     public ViewHolder onCreateViewHolder(@NonNull ViewGroup parent, int viewType) {
-        return new ViewHolder(LayoutInflater.from(parent.getContext()).inflate(R.layout.itemfilm,parent,false));
+        return new ViewHolder(LayoutInflater.from(parent.getContext()).inflate(R.layout.item_film_trend,parent,false));
     }
 
     @Override
     public void onBindViewHolder(@NonNull ViewHolder holder, @SuppressLint("RecyclerView") int position) {
         Glide.with(context).load(filmsModelList.get(position).getImg_url()).into(holder.actionImg);
-        holder.name.setText(filmsModelList.get(position).getName());
         holder.itemView.setOnClickListener(new View.OnClickListener() {
             @Override
             public void onClick(View view) {
@@ -55,11 +53,9 @@ public class FilmsAdapter extends RecyclerView.Adapter<FilmsAdapter.ViewHolder> 
 
     public static class ViewHolder extends RecyclerView.ViewHolder {
         ImageView actionImg;
-        TextView name,type,desc;
         public ViewHolder(@NonNull View itemView) {
             super(itemView);
             actionImg = itemView.findViewById(R.id.imv_posterFilm);
-            name = itemView.findViewById(R.id.tv_nameFilm);
         }
     }
 }

@@ -11,78 +11,97 @@
         android:layout_width="match_parent"
         android:layout_height="match_parent"
         android:orientation="vertical"
-        android:layout_marginTop="48dp"
+        android:layout_marginTop="105dp"
         tools:ignore="MissingConstraints">
+
         <androidx.fragment.app.FragmentContainerView
             android:id="@+id/fragmentContainerView"
             android:name="com.midterm.reviewfilmproject.FragmentOne"
             android:layout_width="match_parent"
             android:layout_height="match_parent" />
+
     </LinearLayout>
     <androidx.appcompat.widget.LinearLayoutCompat
         android:layout_width="match_parent"
         android:layout_height="wrap_content"
-        android:orientation="horizontal"
+        android:orientation="vertical"
         android:padding="10dp"
         tools:ignore="MissingConstraints">
         <LinearLayout
-            android:layout_width="wrap_content"
+            android:layout_width="match_parent"
             android:layout_height="wrap_content"
-            android:layout_marginRight="15dp"
-            android:layout_gravity="center"
-            android:gravity="center">
-            <ImageView
-                android:layout_width="30dp"
-                android:layout_height="30dp"
-                android:background="@drawable/netflix_icon"
-                android:scaleType="centerCrop"/>
+            android:gravity="fill_vertical">
+            <LinearLayout
+                android:layout_width="wrap_content"
+                android:layout_height="wrap_content"
+                android:layout_marginRight="15dp"
+                android:layout_gravity="center"
+                android:gravity="center">
+                <ImageView
+                    android:layout_width="30dp"
+                    android:layout_height="30dp"
+                    android:background="@drawable/netflix_icon"
+                    android:scaleType="centerCrop"/>
+            </LinearLayout>
+            <LinearLayout
+                android:layout_width="match_parent"
+                android:layout_height="match_parent"
+                android:layout_gravity="center"
+                android:gravity="center_vertical">
+                <TableRow
+                    android:layout_width="wrap_content"
+                    android:layout_height="wrap_content"
+                    >
+                    <TextView
+                        android:id="@+id/tv_allFilms"
+                        android:layout_weight="3"
+                        android:text="Tất cả"
+                        android:textSize="15dp"
+                        android:textStyle="bold"
+                        android:layout_marginRight="10dp"/>
+                    <TextView
+                        android:id="@+id/tv_actionFilms"
+                        android:text="Hành động"
+                        android:textSize="15dp"
+                        android:textStyle="bold"
+                        android:layout_marginRight="10dp"/>
+
+                    <TextView
+                        android:id="@+id/tv_romanticFilms"
+                        android:layout_weight="3"
+                        android:text="Lãng mạn"
+                        android:textSize="15dp"
+                        android:textStyle="bold"
+                        android:layout_marginRight="10dp"/>
+                    <TextView
+                        android:id="@+id/tv_horrifiedFilms"
+                        android:layout_weight="3"
+                        android:text="Kinh dị"
+                        android:textSize="15dp"
+                        android:textStyle="bold"
+                        android:layout_marginRight="10dp"/>
+                    <TextView
+                        android:id="@+id/tv_animeFilms"
+                        android:layout_weight="3"
+                        android:text="Anime"
+                        android:textSize="15dp"
+                        android:textStyle="bold"
+                        android:layout_marginRight="10dp"/>
+
+                </TableRow>
+            </LinearLayout>
         </LinearLayout>
         <LinearLayout
             android:layout_width="match_parent"
-            android:layout_height="match_parent"
-            android:layout_gravity="center"
-            android:gravity="center_vertical">
-            <TableRow
-                android:layout_width="wrap_content"
+            android:layout_height="wrap_content">
+            <androidx.appcompat.widget.SearchView
+                android:layout_width="match_parent"
                 android:layout_height="wrap_content"
-                >
-                <TextView
-                    android:id="@+id/tv_allFilms"
-                    android:layout_weight="3"
-                    android:text="Tất cả"
-                    android:textSize="15dp"
-                    android:textStyle="bold"
-                    android:layout_marginRight="10dp"/>
-                <TextView
-                    android:id="@+id/tv_actionFilms"
-                    android:text="Hành động"
-                    android:textSize="15dp"
-                    android:textStyle="bold"
-                    android:layout_marginRight="10dp"/>
+                app:defaultQueryHint="Search Film"
+                android:background="@drawable/bg_search"
+                app:queryHint="Search film">
 
-                <TextView
-                    android:id="@+id/tv_romanticFilms"
-                    android:layout_weight="3"
-                    android:text="Lãng mạn"
-                    android:textSize="15dp"
-                    android:textStyle="bold"
-                    android:layout_marginRight="10dp"/>
-                <TextView
-                    android:id="@+id/tv_horrifiedFilms"
-                    android:layout_weight="3"
-                    android:text="Kinh dị"
-                    android:textSize="15dp"
-                    android:textStyle="bold"
-                    android:layout_marginRight="10dp"/>
-                <TextView
-                    android:id="@+id/tv_animeFilms"
-                    android:layout_weight="3"
-                    android:text="Anime"
-                    android:textSize="15dp"
-                    android:textStyle="bold"
-                    android:layout_marginRight="10dp"/>
-
-            </TableRow>
+            </androidx.appcompat.widget.SearchView>
         </LinearLayout>
     </androidx.appcompat.widget.LinearLayoutCompat>
 

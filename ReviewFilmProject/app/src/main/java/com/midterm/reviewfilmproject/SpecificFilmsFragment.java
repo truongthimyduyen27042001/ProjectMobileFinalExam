@@ -1,16 +1,31 @@
 package com.midterm.reviewfilmproject;
 
 import android.os.Bundle;
+import android.text.TextUtils;
+import android.util.Log;
 import android.view.LayoutInflater;
 import android.view.View;
 import android.view.ViewGroup;
+import android.widget.ImageView;
+import android.widget.TextView;
+import android.widget.Toast;
 
+import androidx.annotation.NonNull;
+import androidx.core.view.ViewCompat;
 import androidx.fragment.app.Fragment;
 import androidx.recyclerview.widget.GridLayoutManager;
 import androidx.recyclerview.widget.LinearLayoutManager;
+import androidx.recyclerview.widget.RecyclerView;
 
+import com.google.android.gms.common.internal.Constants;
+import com.google.android.gms.tasks.OnCompleteListener;
+import com.google.android.gms.tasks.Task;
+import com.google.firebase.firestore.FirebaseFirestore;
+import com.google.firebase.firestore.QueryDocumentSnapshot;
+import com.google.firebase.firestore.QuerySnapshot;
 import com.midterm.reviewfilmproject.databinding.FragmentSpecificFilmsBinding;
 
+import java.io.Serializable;
 import java.util.ArrayList;
 import java.util.List;
 
@@ -18,10 +33,12 @@ import java.util.List;
 public class SpecificFilmsFragment extends Fragment {
 
     FragmentSpecificFilmsBinding binding;
-    private List<film> listFilms;
-    private filmAdapter filmAdapter;
-    private filmTrendAdapter filmTrendAdapter;
-    private List<film> listTrendFilms;
+    private List<FilmsModel> listFilms;
+    private FilmsAdapter filmAdapter;
+    List<FilmsModel> filmsModelList5;
+    FilmTrendAdapter filmsAdapter5;
+    FirebaseFirestore db;
+    int type;
 
     public SpecificFilmsFragment() {
     }
@@ -36,52 +53,165 @@ public class SpecificFilmsFragment extends Fragment {
                              Bundle savedInstanceState) {
         binding = FragmentSpecificFilmsBinding.inflate(inflater, container, false);
         View view = binding.getRoot();
+        binding.rcvFilmsTrend.setLayoutManager(new LinearLayoutManager(getActivity(),RecyclerView.HORIZONTAL,false));
+        filmsModelList5 = new ArrayList<>();
+        filmsAdapter5 = new FilmTrendAdapter(getActivity(),filmsModelList5);
+        binding.rcvFilmsTrend.setAdapter(filmsAdapter5);
 
-        film f = new film(1,"Phòng chat thứ n",2022,"Đây là một bộ phim xuất phát từ hàn quốc",false);
-        film f1 = new film(2,"Phòng chat thứ n1",2022,"Đây là một bộ phim xuất phát từ Việt Nam",true);
-        film f2 = new film(3,"Phòng chat thứ n2",2022,"Đây là một bộ phim xuất phát từ Nhật Bản",false);
-        film f3 = new film(4,"Phòng chat thứ n3",2022,"Đây là một bộ phim xuất phát từ Trung Quốc",true);
-        film f4 = new film(1,"Phòng chat thứ n",2022,"Đây là một bộ phim xuất phát từ hàn quốc",false);
-        film f5 = new film(5,"Phòng chat thứ n1",2022,"Đây là một bộ phim xuất phát từ Việt Nam",true);
-        film f6 = new film(6,"Phòng chat thứ n2",2022,"Đây là một bộ phim xuất phát từ Nhật Bản",false);
-        film f7 = new film(7,"Phòng chat thứ n3",2022,"Đây là một bộ phim xuất phát từ Trung Quốc",false);
-        film f8 = new film(8,"Phòng chat thứ n",2022,"Đây là một bộ phim xuất phát từ hàn quốc",true);
-        film f9 = new film(9,"Phòng chat thứ n1",2022,"Đây là một bộ phim xuất phát từ Việt Nam",true);
-        film f10 = new film(10,"Phòng chat thứ n2",2022,"Đây là một bộ phim xuất phát từ Nhật Bản",false);
-        film f11 = new film(11,"Phòng chat thứ n3",2022,"Đây là một bộ phim xuất phát từ Trung Quốc",true);
+        //test
+        Bundle arguments = getArguments();
+        if (arguments == null) {
+            arguments = getParentFragment().getArguments();
+        }
+        if (arguments != null) {
+            type = Integer.parseInt(arguments.getSerializable("type").toString());
+        }
 
-        listFilms = new ArrayList<film>();
-        listFilms.add(f);
-        listFilms.add(f1);
-        listFilms.add(f2);
-        listFilms.add(f3);
+        listFilms = new ArrayList<FilmsModel>();
+        db= FirebaseFirestore.getInstance();
+        if (type==1) {
 
-        listTrendFilms = new ArrayList<film>();
-        listTrendFilms.add(f);
-        listTrendFilms.add(f1);
-        listTrendFilms.add(f2);
-        listTrendFilms.add(f3);
-        listTrendFilms.add(f4);
-        listTrendFilms.add(f5);
-        listTrendFilms.add(f6);
-        listTrendFilms.add(f7);
-        listTrendFilms.add(f8);
-        listTrendFilms.add(f9);
-        listTrendFilms.add(f10);
-        listTrendFilms.add(f11);
+            db.collection("Films").whereEqualTo("type","Action movie")
+                    .get()
+                    .addOnCompleteListener(new OnCompleteListener<QuerySnapshot>() {
+                        @Override
+                        public void onComplete(@NonNull Task<QuerySnapshot> task) {
+                            if(task.isSuccessful()){
+                                for (QueryDocumentSnapshot document : task.getResult()){
+                                    FilmsModel f = document.toObject(FilmsModel.class);
+                                    listFilms.add(f);
+                                    filmAdapter.notifyDataSetChanged();
+                                }
+                            } else {
+                                Toast.makeText(getActivity(), "ERROR"+task.getException(), Toast.LENGTH_SHORT).show();
+                            }
+                        }
+                    });
 
-        filmAdapter = new filmAdapter(listFilms);
-        filmTrendAdapter = new filmTrendAdapter(listTrendFilms);
+            db.collection("Films").whereEqualTo("type","Action movie").whereEqualTo("istrending", true)
+                    .get()
+                    .addOnCompleteListener(new OnCompleteListener<QuerySnapshot>() {
+                        @Override
+                        public void onComplete(@NonNull Task<QuerySnapshot> task) {
+                            if(task.isSuccessful()){
+                                for (QueryDocumentSnapshot document : task.getResult()){
+                                    FilmsModel f = document.toObject(FilmsModel.class);
+                                    filmsModelList5.add(f);
+                                    filmsAdapter5.notifyDataSetChanged();
+                                }
+                            } else {
+                                Toast.makeText(getActivity(), "ERROR"+task.getException(), Toast.LENGTH_SHORT).show();
+                            }
+                        }
+                    });
+        }
+        else if (type==2) {
+            db.collection("Films").whereEqualTo("type","Romantic movie")
+                    .get()
+                    .addOnCompleteListener(new OnCompleteListener<QuerySnapshot>() {
+                        @Override
+                        public void onComplete(@NonNull Task<QuerySnapshot> task) {
+                            if(task.isSuccessful()){
+                                for (QueryDocumentSnapshot document : task.getResult()){
+                                    FilmsModel f = document.toObject(FilmsModel.class);
+                                    listFilms.add(f);
+                                    filmAdapter.notifyDataSetChanged();
+                                }
+                            } else {
+                                Toast.makeText(getActivity(), "ERROR"+task.getException(), Toast.LENGTH_SHORT).show();
+                            }
+                        }
+                    });
+            db.collection("Films").whereEqualTo("type","Romantic movie").whereEqualTo("istrending", true)
+                    .get()
+                    .addOnCompleteListener(new OnCompleteListener<QuerySnapshot>() {
+                        @Override
+                        public void onComplete(@NonNull Task<QuerySnapshot> task) {
+                            if(task.isSuccessful()){
+                                for (QueryDocumentSnapshot document : task.getResult()){
+                                    FilmsModel f = document.toObject(FilmsModel.class);
+                                    filmsModelList5.add(f);
+                                    filmsAdapter5.notifyDataSetChanged();
+                                }
+                            } else {
+                                Toast.makeText(getActivity(), "ERROR"+task.getException(), Toast.LENGTH_SHORT).show();
+                            }
+                        }
+                    });
+        }
+        else if (type==3) {
+            db.collection("Films").whereEqualTo("type","Horror movie")
+                    .get()
+                    .addOnCompleteListener(new OnCompleteListener<QuerySnapshot>() {
+                        @Override
+                        public void onComplete(@NonNull Task<QuerySnapshot> task) {
+                            if(task.isSuccessful()){
+                                for (QueryDocumentSnapshot document : task.getResult()){
+                                    FilmsModel f = document.toObject(FilmsModel.class);
+                                    listFilms.add(f);
+                                    filmAdapter.notifyDataSetChanged();
+                                }
+                            } else {
+                                Toast.makeText(getActivity(), "ERROR"+task.getException(), Toast.LENGTH_SHORT).show();
+                            }
+                        }
+                    });
 
-        LinearLayoutManager layoutManager = new LinearLayoutManager(getContext(),LinearLayoutManager.VERTICAL,false);
-        LinearLayoutManager layoutManager2
-                = new LinearLayoutManager(getContext(),LinearLayoutManager.HORIZONTAL,false);
+            db.collection("Films").whereEqualTo("type","Horror movie").whereEqualTo("istrending", true)
+                    .get()
+                    .addOnCompleteListener(new OnCompleteListener<QuerySnapshot>() {
+                        @Override
+                        public void onComplete(@NonNull Task<QuerySnapshot> task) {
+                            if(task.isSuccessful()){
+                                for (QueryDocumentSnapshot document : task.getResult()){
+                                    FilmsModel f = document.toObject(FilmsModel.class);
+                                    filmsModelList5.add(f);
+                                    filmsAdapter5.notifyDataSetChanged();
+                                }
+                            } else {
+                                Toast.makeText(getActivity(), "ERROR"+task.getException(), Toast.LENGTH_SHORT).show();
+                            }
+                        }
+                    });
+        }
+        else if (type==4) {
+            db.collection("Films").whereEqualTo("type","Anime movie")
+                    .get()
+                    .addOnCompleteListener(new OnCompleteListener<QuerySnapshot>() {
+                        @Override
+                        public void onComplete(@NonNull Task<QuerySnapshot> task) {
+                            if(task.isSuccessful()){
+                                for (QueryDocumentSnapshot document : task.getResult()){
+                                    FilmsModel f = document.toObject(FilmsModel.class);
+                                    listFilms.add(f);
+                                    filmAdapter.notifyDataSetChanged();
+                                }
+                            } else {
+                                Toast.makeText(getActivity(), "ERROR"+task.getException(), Toast.LENGTH_SHORT).show();
+                            }
+                        }
+                    });
 
-        binding.rcvActionFilms.setLayoutManager(new GridLayoutManager(getContext(), 2));
+            db.collection("Films").whereEqualTo("type","Anime movie").whereEqualTo("istrending", true)
+                    .get()
+                    .addOnCompleteListener(new OnCompleteListener<QuerySnapshot>() {
+                        @Override
+                        public void onComplete(@NonNull Task<QuerySnapshot> task) {
+                            if(task.isSuccessful()){
+                                for (QueryDocumentSnapshot document : task.getResult()){
+                                    FilmsModel f = document.toObject(FilmsModel.class);
+                                    filmsModelList5.add(f);
+                                    filmsAdapter5.notifyDataSetChanged();
+                                }
+                            } else {
+                                Toast.makeText(getActivity(), "ERROR"+task.getException(), Toast.LENGTH_SHORT).show();
+                            }
+                        }
+                    });
+        }
+        filmAdapter = new FilmsAdapter(getActivity(),listFilms);
+        binding.rcvActionFilms.setLayoutManager(new GridLayoutManager(getContext(),2));
         binding.rcvActionFilms.setAdapter(filmAdapter);
-
-        binding.rcvFilmsTrend.setLayoutManager(layoutManager2);
-        binding.rcvFilmsTrend.setAdapter(filmTrendAdapter);
 
         return view;
     }

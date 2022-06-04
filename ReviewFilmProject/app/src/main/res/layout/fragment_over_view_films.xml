@@ -9,79 +9,79 @@
         android:layout_width="wrap_content"
         android:layout_height="wrap_content"
         android:layout_centerInParent="true"/>
+
     <ScrollView
         android:id="@+id/scroll_view"
         android:layout_width="match_parent"
         android:layout_height="wrap_content"
         android:orientation="vertical">
+
         <LinearLayout
             android:layout_width="match_parent"
             android:layout_height="wrap_content"
             android:orientation="vertical"
             tools:context=".StoreFragment">
-            <EditText
-                android:id="@+id/search_box"
-                android:layout_width="match_parent"
-                android:layout_height="wrap_content"
-                android:layout_margin="8dp"
-                android:background="@drawable/btn_bg"
-                android:padding="13dp"
-                android:drawableLeft="@drawable/search_icon"
-                android:hint="Search Your Film Here ..."
-                android:drawablePadding="5dp"/>
+
             <LinearLayout
                 android:layout_width="match_parent"
                 android:layout_height="wrap_content"
                 android:orientation="vertical"
-                tools:context=".MainActivity"
-                android:padding="10dp">
+                android:padding="10dp"
+                tools:context=".MainActivity">
+
                 <TextView
                     android:layout_width="match_parent"
                     android:layout_height="wrap_content"
-                    android:text="Xem trước"
-                    android:textSize="17dp"
                     android:layout_marginBottom="10dp"
+                    android:text="Xu Hướng"
+                    android:textSize="17dp"
                     android:textStyle="bold"></TextView>
+
                 <LinearLayout
                     android:layout_width="match_parent"
                     android:layout_height="wrap_content">
+
                     <androidx.recyclerview.widget.RecyclerView
                         android:id="@+id/rcvFilmsTrend"
                         android:layout_width="match_parent"
                         android:layout_height="wrap_content" />
                 </LinearLayout>
             </LinearLayout>
+
             <LinearLayout
                 android:layout_width="match_parent"
                 android:layout_height="wrap_content"
                 android:orientation="vertical"
-                tools:context=".StoreFragment"
-                android:paddingLeft="10dp">
+                android:paddingLeft="10dp"
+                tools:context=".StoreFragment">
+
                 <LinearLayout
                     android:layout_width="match_parent"
                     android:layout_height="wrap_content"
-                    android:layout_marginRight="10dp"
                     android:layout_marginLeft="10dp"
+                    android:layout_marginRight="10dp"
                     android:orientation="horizontal"
                     android:weightSum="2">
+
                     <TextView
                         android:layout_width="match_parent"
                         android:layout_height="wrap_content"
                         android:layout_weight="1"
                         android:text="Hành động"
-                        android:textStyle="bold"
-                        android:textSize="18sp"></TextView>
+                        android:textSize="18sp"
+                        android:textStyle="bold"></TextView>
+
                     <TextView
+                        android:id="@+id/view_all_action"
                         android:layout_width="match_parent"
                         android:layout_height="wrap_content"
-                        android:id="@+id/view_all_action"
-                        android:text="View All"
+                        android:layout_marginRight="7dp"
                         android:layout_weight="1"
                         android:gravity="end"
-                        android:layout_marginRight="7dp"
-                        android:textStyle="bold"
+                        android:text="View All"
                         android:textColor="@color/colorPrimary"
-                        android:textSize="18sp"></TextView>
+                        android:textSize="18sp"
+                        android:textStyle="bold"></TextView>
                 </LinearLayout>
 
                 <androidx.recyclerview.widget.RecyclerView
@@ -90,37 +90,41 @@
                     android:layout_height="wrap_content" />
 
             </LinearLayout>
+
             <LinearLayout
                 android:layout_width="match_parent"
                 android:layout_height="wrap_content"
                 android:orientation="vertical"
-                tools:context=".StoreFragment"
-                android:paddingLeft="10dp">
+                android:paddingLeft="10dp"
+                tools:context=".StoreFragment">
+
                 <LinearLayout
                     android:layout_width="match_parent"
                     android:layout_height="wrap_content"
-                    android:layout_marginRight="10dp"
                     android:layout_marginLeft="10dp"
+                    android:layout_marginRight="10dp"
                     android:orientation="horizontal"
                     android:weightSum="2">
+
                     <TextView
                         android:layout_width="match_parent"
                         android:layout_height="wrap_content"
                         android:layout_weight="1"
                         android:text="Lãng Mạn"
-                        android:textStyle="bold"
-                        android:textSize="18sp"></TextView>
+                        android:textSize="18sp"
+                        android:textStyle="bold"></TextView>
+
                     <TextView
+                        android:id="@+id/view_all_romantic"
                         android:layout_width="match_parent"
                         android:layout_height="wrap_content"
-                        android:id="@+id/view_all_romantic"
-                        android:text="View All"
+                        android:layout_marginRight="7dp"
                         android:layout_weight="1"
                         android:gravity="end"
-                        android:layout_marginRight="7dp"
-                        android:textStyle="bold"
+                        android:text="View All"
                         android:textColor="@color/colorPrimary"
-                        android:textSize="18sp"></TextView>
+                        android:textSize="18sp"
+                        android:textStyle="bold"></TextView>
                 </LinearLayout>
 
                 <androidx.recyclerview.widget.RecyclerView
@@ -129,37 +133,41 @@
                     android:layout_height="wrap_content" />
 
             </LinearLayout>
+
             <LinearLayout
                 android:layout_width="match_parent"
                 android:layout_height="wrap_content"
                 android:orientation="vertical"
-                tools:context=".StoreFragment"
-                android:paddingLeft="10dp">
+                android:paddingLeft="10dp"
+                tools:context=".StoreFragment">
+
                 <LinearLayout
                     android:layout_width="match_parent"
                     android:layout_height="wrap_content"
-                    android:layout_marginRight="10dp"
                     android:layout_marginLeft="10dp"
+                    android:layout_marginRight="10dp"
                     android:orientation="horizontal"
                     android:weightSum="2">
+
                     <TextView
                         android:layout_width="match_parent"
                         android:layout_height="wrap_content"
                         android:layout_weight="1"
                         android:text="Kinh Dị"
-                        android:textStyle="bold"
-                        android:textSize="18sp"></TextView>
+                        android:textSize="18sp"
+                        android:textStyle="bold"></TextView>
+
                     <TextView
+                        android:id="@+id/view_all_horror"
                         android:layout_width="match_parent"
                         android:layout_height="wrap_content"
-                        android:id="@+id/view_all_horror"
-                        android:text="View All"
+                        android:layout_marginRight="7dp"
                         android:layout_weight="1"
                         android:gravity="end"
-                        android:layout_marginRight="7dp"
-                        android:textStyle="bold"
+                        android:text="View All"
                         android:textColor="@color/colorPrimary"
-                        android:textSize="18sp"></TextView>
+                        android:textSize="18sp"
+                        android:textStyle="bold"></TextView>
                 </LinearLayout>
 
                 <androidx.recyclerview.widget.RecyclerView
@@ -168,44 +176,48 @@
                     android:layout_height="wrap_content" />
 
             </LinearLayout>
+
             <LinearLayout
                 android:layout_width="match_parent"
                 android:layout_height="wrap_content"
                 android:orientation="vertical"
-                tools:context=".StoreFragment"
-                android:paddingLeft="10dp">
+                android:paddingLeft="10dp"
+                tools:context=".StoreFragment">
+
                 <LinearLayout
                     android:layout_width="match_parent"
                     android:layout_height="wrap_content"
-                    android:layout_marginRight="10dp"
                     android:layout_marginLeft="10dp"
+                    android:layout_marginRight="10dp"
                     android:orientation="horizontal"
                     android:weightSum="2">
+
                     <TextView
                         android:layout_width="match_parent"
                         android:layout_height="wrap_content"
                         android:layout_weight="1"
                         android:text="Anime"
-                        android:textStyle="bold"
-                        android:textSize="18sp"></TextView>
+                        android:textSize="18sp"
+                        android:textStyle="bold"></TextView>
+
                     <TextView
+                        android:id="@+id/view_all_Anime"
                         android:layout_width="match_parent"
                         android:layout_height="wrap_content"
-                        android:id="@+id/view_all_Anime"
-                        android:text="View All"
+                        android:layout_marginRight="7dp"
                         android:layout_weight="1"
                         android:gravity="end"
-                        android:layout_marginRight="7dp"
-                        android:textStyle="bold"
+                        android:text="View All"
                         android:textColor="@color/colorPrimary"
-                        android:textSize="18sp"></TextView>
+                        android:textSize="18sp"
+                        android:textStyle="bold"></TextView>
                 </LinearLayout>
 
                 <androidx.recyclerview.widget.RecyclerView
                     android:id="@+id/rcvAnimeFilms"
                     android:layout_width="match_parent"
                     android:layout_height="wrap_content"
-                    android:layout_marginBottom="24dp"/>
+                    android:layout_marginBottom="24dp" />
 
             </LinearLayout>
         </LinearLayout>
