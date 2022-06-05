@@ -6,7 +6,8 @@
     tools:context=".SpecificFilmsFragment">
     <ScrollView android:layout_width="match_parent"
         android:layout_height="wrap_content"
-        android:orientation="vertical">
+        android:orientation="vertical"
+        android:layout_marginBottom="50dp">
         <LinearLayout
             android:layout_width="match_parent"
             android:layout_height="wrap_content"
@@ -23,6 +24,7 @@
                     android:layout_width="match_parent"
                     android:layout_height="wrap_content"
                     android:text="Xu Hướng"
+                    android:textColor="@color/colorAccent"
                     android:textSize="17dp"
                     android:layout_marginBottom="10dp"
                     android:textStyle="bold"
@@ -43,9 +45,11 @@
                 tools:context=".StoreFragment"
                 android:paddingLeft="10dp">
                 <TextView
+                    android:id="@+id/typeOfFilm"
                     android:layout_width="match_parent"
                     android:layout_height="wrap_content"
                     android:text="Hành động"
+                    android:textColor="@color/colorAccent"
                     android:textStyle="bold"
                     android:textSize="17dp"></TextView>
 

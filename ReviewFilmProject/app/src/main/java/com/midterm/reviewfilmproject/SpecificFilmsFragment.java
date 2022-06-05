@@ -1,23 +1,17 @@
 package com.midterm.reviewfilmproject;
 
 import android.os.Bundle;
-import android.text.TextUtils;
-import android.util.Log;
 import android.view.LayoutInflater;
 import android.view.View;
 import android.view.ViewGroup;
-import android.widget.ImageView;
-import android.widget.TextView;
 import android.widget.Toast;
 
 import androidx.annotation.NonNull;
-import androidx.core.view.ViewCompat;
 import androidx.fragment.app.Fragment;
 import androidx.recyclerview.widget.GridLayoutManager;
 import androidx.recyclerview.widget.LinearLayoutManager;
 import androidx.recyclerview.widget.RecyclerView;
 
-import com.google.android.gms.common.internal.Constants;
 import com.google.android.gms.tasks.OnCompleteListener;
 import com.google.android.gms.tasks.Task;
 import com.google.firebase.firestore.FirebaseFirestore;
@@ -25,7 +19,6 @@ import com.google.firebase.firestore.QueryDocumentSnapshot;
 import com.google.firebase.firestore.QuerySnapshot;
 import com.midterm.reviewfilmproject.databinding.FragmentSpecificFilmsBinding;
 
-import java.io.Serializable;
 import java.util.ArrayList;
 import java.util.List;
 
@@ -70,7 +63,7 @@ public class SpecificFilmsFragment extends Fragment {
         listFilms = new ArrayList<FilmsModel>();
         db= FirebaseFirestore.getInstance();
         if (type==1) {
-
+            binding.typeOfFilm.setText("Hành động");
             db.collection("Films").whereEqualTo("type","Action movie")
                     .get()
                     .addOnCompleteListener(new OnCompleteListener<QuerySnapshot>() {
@@ -106,6 +99,7 @@ public class SpecificFilmsFragment extends Fragment {
                     });
         }
         else if (type==2) {
+            binding.typeOfFilm.setText("Lãng mạn");
             db.collection("Films").whereEqualTo("type","Romantic movie")
                     .get()
                     .addOnCompleteListener(new OnCompleteListener<QuerySnapshot>() {
@@ -140,6 +134,8 @@ public class SpecificFilmsFragment extends Fragment {
                     });
         }
         else if (type==3) {
+            binding.typeOfFilm.setText("Kinh dị");
+
             db.collection("Films").whereEqualTo("type","Horror movie")
                     .get()
                     .addOnCompleteListener(new OnCompleteListener<QuerySnapshot>() {
@@ -175,6 +171,7 @@ public class SpecificFilmsFragment extends Fragment {
                     });
         }
         else if (type==4) {
+            binding.typeOfFilm.setText("Anime");
             db.collection("Films").whereEqualTo("type","Anime movie")
                     .get()
                     .addOnCompleteListener(new OnCompleteListener<QuerySnapshot>() {
