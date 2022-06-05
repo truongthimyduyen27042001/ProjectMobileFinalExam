@@ -10,7 +10,6 @@ import android.widget.Toast;
 
 import androidx.annotation.NonNull;
 import androidx.fragment.app.Fragment;
-import androidx.fragment.app.FragmentManager;
 import androidx.recyclerview.widget.LinearLayoutManager;
 import androidx.recyclerview.widget.RecyclerView;
 
@@ -206,19 +205,6 @@ public class OverViewFilmsFragment extends Fragment {
 
 
         //set event for choice actions film
-        binding.viewAllAction.setOnClickListener(new View.OnClickListener() {
-            @Override
-            public void onClick(View view) {
-                SpecificFilmsFragment specificFilmsFragment = new SpecificFilmsFragment();
-                FragmentManager fragmentManager = getActivity().getSupportFragmentManager();
-
-                fragmentManager.beginTransaction()
-                        .replace(R.id.fragmentContainerView, specificFilmsFragment, null)
-                        .setReorderingAllowed(true)
-                        .addToBackStack(null) // name can be null
-                        .commit();
-            }
-        });
 
         return view;
     }
