@@ -17,7 +17,9 @@ import androidx.fragment.app.Fragment;
 import androidx.fragment.app.FragmentManager;
 
 import com.bumptech.glide.Glide;
+import com.google.android.gms.tasks.OnCompleteListener;
 import com.google.android.gms.tasks.OnSuccessListener;
+import com.google.android.gms.tasks.Task;
 import com.google.firebase.auth.FirebaseAuth;
 import com.google.firebase.database.DataSnapshot;
 import com.google.firebase.database.DatabaseError;
@@ -27,6 +29,8 @@ import com.google.firebase.storage.FirebaseStorage;
 import com.google.firebase.storage.StorageReference;
 import com.google.firebase.storage.UploadTask;
 import com.midterm.reviewfilmproject.databinding.FragmentProfileBinding;
+
+import java.util.HashMap;
 
 import de.hdodenhof.circleimageview.CircleImageView;
 
@@ -58,7 +62,7 @@ public class ProfileFragment extends Fragment {
         profileImg = binding.profileImg;
         name = binding.profileName;
 //        address = binding.profileAddress;
-//        email = binding.profileEmail;
+        email = binding.profileEmail;
 //        number = binding.profilePhone;
         update = binding.update;
         logout = binding.logout;
@@ -71,7 +75,7 @@ public class ProfileFragment extends Fragment {
 
                         Glide.with(getContext()).load(userModel.getProfileImg()).into(profileImg);
                         name.setText(userModel.getName());
-//                        email.setText(userModel.getEmail());
+                        email.setText(userModel.getEmail());
                     }
 
                     @Override
@@ -93,7 +97,8 @@ public class ProfileFragment extends Fragment {
         update.setOnClickListener(new View.OnClickListener() {
             @Override
             public void onClick(View view) {
-                updateUserProfile();
+                String nameUser = name.getText().toString();
+                updateUserProfile(nameUser);
             }
         });
 
@@ -102,28 +107,22 @@ public class ProfileFragment extends Fragment {
             public void onClick(View view) {
                 auth.signOut();
                 Intent intent = new Intent(getActivity(), LoginActivity.class);
-
                 intent.setFlags(Intent.FLAG_ACTIVITY_NEW_TASK | Intent.FLAG_ACTIVITY_CLEAR_TASK);//makesure user cant go back
                 startActivity(intent);
             }
         });
         return view;
-
     }
 
-    private void updateUserProfile() {
-//        database.getReference().child("Users").child(FirebaseAuth.getInstance().getUid())
-//                .addValueEventListener(new ValueEventListener() {
-//                    @Override
-//                    public void onDataChange(@NonNull DataSnapshot snapshot) {
-//
-//                    }
-//
-//                    @Override
-//                    public void onCancelled(@NonNull DatabaseError error) {
-//
-//                    }
-//                })
+    private void updateUserProfile(String nameUser) {
+
+        database.getReference("Users").child(FirebaseAuth.getInstance().getUid())
+                .child("name").setValue(nameUser).addOnCompleteListener(new OnCompleteListener<Void>() {
+            @Override
+            public void onComplete(@NonNull Task<Void> task) {
+                Toast.makeText(getContext(), "Done Update!", Toast.LENGTH_SHORT).show();
+            }
+        });
     }
 
     @Override
