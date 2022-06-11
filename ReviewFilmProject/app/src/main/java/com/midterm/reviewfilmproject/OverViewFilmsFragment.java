@@ -144,7 +144,6 @@ public class OverViewFilmsFragment extends Fragment {
                                 FilmsModel filmsModel2 = document.toObject(FilmsModel.class);
                                 filmsModelList2.add(filmsModel2);
                                 filmsAdapter2.notifyDataSetChanged();
-
                             }
                         } else {
                             Toast.makeText(getActivity(), "ERROR"+task.getException(), Toast.LENGTH_SHORT).show();

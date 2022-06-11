@@ -19,9 +19,13 @@ import com.google.android.gms.tasks.OnCompleteListener;
 import com.google.android.gms.tasks.Task;
 import com.google.firebase.auth.FirebaseAuth;
 import com.google.firebase.firestore.DocumentReference;
+import com.google.firebase.firestore.DocumentSnapshot;
 import com.google.firebase.firestore.FirebaseFirestore;
+import com.google.firebase.firestore.QuerySnapshot;
 
+import java.util.ArrayList;
 import java.util.HashMap;
+import java.util.List;
 
 public class DetailsActivity extends AppCompatActivity {
 
@@ -31,6 +35,7 @@ public class DetailsActivity extends AppCompatActivity {
     ImageButton addToFavorite;
     Toolbar toolbar;
     FilmsModel filmsModel = null;
+    public List filmsModelList = new ArrayList<>();
 
     FirebaseFirestore firestore;
     FirebaseAuth auth;
@@ -44,7 +49,6 @@ public class DetailsActivity extends AppCompatActivity {
         auth = FirebaseAuth.getInstance();
 
         final Object object = getIntent().getSerializableExtra("detail");
-        Log.d("OK", String.valueOf(object));
         if( object instanceof FilmsModel){
             filmsModel = (FilmsModel) object;
         }
@@ -71,6 +75,24 @@ public class DetailsActivity extends AppCompatActivity {
                 startActivity(intent);
             }
         });
+
+        firestore.collection("AddToFavorite").document(auth.getCurrentUser().getUid())
+                .collection("CurrentUser").get().addOnCompleteListener(new OnCompleteListener<QuerySnapshot>() {
+            @Override
+            public void onComplete(@NonNull Task<QuerySnapshot> task) {
+                if(task.isSuccessful()){
+                    for(DocumentSnapshot documentSnapshot : task.getResult().getDocuments()){
+                        String documentId = documentSnapshot.getId();
+                        FilmsModel filmsModel = documentSnapshot.toObject(FilmsModel.class);
+                        filmsModel.setDocumentId(documentId);
+                        filmsModelList.add(filmsModel.getName());
+                    }
+
+                    Log.d("OK",filmsModelList.toString());
+                }
+            }
+        });
+
         addToFavorite = findViewById(R.id.favorite);
         addToFavorite.setOnClickListener(new View.OnClickListener() {
             @Override
@@ -79,6 +101,7 @@ public class DetailsActivity extends AppCompatActivity {
                 addToFavorite.setBackgroundResource(R.drawable.ic_baseline_red_favorite_24);
             }
         });
+        Log.d("ok",filmsModelList.toString());
     }
 
     private void addToFav() {
@@ -90,15 +113,21 @@ public class DetailsActivity extends AppCompatActivity {
         fvr.put("img_url",filmsModel.getImg_url());
         fvr.put("video",filmsModel.getVideo());
         fvr.put("isTrending",filmsModel.getIstrending());
-        
-        firestore.collection("AddToFavorite").document(auth.getCurrentUser().getUid())
-                .collection("CurrentUser").add(fvr).addOnCompleteListener(new OnCompleteListener<DocumentReference>() {
-            @Override
-            public void onComplete(@NonNull Task<DocumentReference> task) {
-                Toast.makeText(DetailsActivity.this, "Add to Favorite", Toast.LENGTH_SHORT).show();
-                finish();
-            }
-        });
+
+        if(filmsModelList.contains(filmsModel.getName())){
+            Toast.makeText(DetailsActivity.this, "Ton Tai Phim", Toast.LENGTH_SHORT).show();
+        }else{
+            filmsModelList.add(filmsModel.getName());
+            firestore.collection("AddToFavorite").document(auth.getCurrentUser().getUid())
+                    .collection("CurrentUser").add(fvr).addOnCompleteListener(new OnCompleteListener<DocumentReference>() {
+                @Override
+                public void onComplete(@NonNull Task<DocumentReference> task) {
+                    Toast.makeText(DetailsActivity.this, "Add to Favorite", Toast.LENGTH_SHORT).show();
+                    finish();
+                }
+            });
+        }
+
 
     }
 }

@@ -45,53 +45,23 @@
         app:layout_constraintTop_toTopOf="parent"
         app:layout_constraintVertical_bias="0.5"/>
 
-<!--    <EditText-->
-<!--        android:id="@+id/profile_email"-->
-<!--        android:layout_width="0dp"-->
-<!--        android:layout_height="wrap_content"-->
-<!--        android:background="@drawable/edittext_bg"-->
-<!--        android:hint="Your Email"-->
-<!--        android:padding="15dp"-->
-<!--        app:layout_constraintWidth_percent="0.8"-->
-<!--        android:layout_marginTop="20dp"-->
-<!--        android:drawableLeft="@drawable/person"-->
-<!--        android:drawablePadding="10dp"-->
-<!--        android:elevation="3dp"-->
-<!--        app:layout_constraintEnd_toEndOf="parent"-->
-<!--        app:layout_constraintStart_toStartOf="parent"-->
-<!--        app:layout_constraintTop_toBottomOf="@+id/profile_name" />-->
+    <EditText
+        android:editable="false"
+        android:id="@+id/profile_email"
+        android:layout_width="0dp"
+        android:layout_height="wrap_content"
+        android:background="@drawable/edittext_bg"
+        android:hint="Your Email"
+        android:padding="15dp"
+        android:layout_marginTop="20dp"
+        android:drawableLeft="@drawable/person"
+        android:drawablePadding="10dp"
+        android:elevation="3dp"
+        app:layout_constraintEnd_toEndOf="parent"
+        app:layout_constraintStart_toStartOf="parent"
+        app:layout_constraintTop_toBottomOf="@+id/profile_name" />
 
-<!--    <EditText-->
-<!--        android:id="@+id/profile_phone"-->
-<!--        android:layout_width="0dp"-->
-<!--        android:layout_height="wrap_content"-->
-<!--        android:background="@drawable/edittext_bg"-->
-<!--        android:hint="Your Phone Number"-->
-<!--        android:padding="15dp"-->
-<!--        app:layout_constraintWidth_percent="0.8"-->
-<!--        android:layout_marginTop="20dp"-->
-<!--        android:drawableLeft="@drawable/person"-->
-<!--        android:drawablePadding="10dp"-->
-<!--        android:elevation="3dp"-->
-<!--        app:layout_constraintEnd_toEndOf="parent"-->
-<!--        app:layout_constraintStart_toStartOf="parent"-->
-<!--        app:layout_constraintTop_toBottomOf="@+id/profile_email" />-->
 
-<!--    <EditText-->
-<!--        android:id="@+id/profile_address"-->
-<!--        android:layout_width="0dp"-->
-<!--        android:layout_height="wrap_content"-->
-<!--        android:background="@drawable/edittext_bg"-->
-<!--        android:hint="Your Address"-->
-<!--        android:padding="15dp"-->
-<!--        app:layout_constraintWidth_percent="0.8"-->
-<!--        android:layout_marginTop="20dp"-->
-<!--        android:drawableLeft="@drawable/person"-->
-<!--        android:drawablePadding="10dp"-->
-<!--        android:elevation="3dp"-->
-<!--        app:layout_constraintEnd_toEndOf="parent"-->
-<!--        app:layout_constraintStart_toStartOf="parent"-->
-<!--        app:layout_constraintTop_toBottomOf="@+id/profile_phone" />-->
 
     <Button
         android:id="@+id/update"
@@ -105,7 +75,7 @@
         app:layout_constraintEnd_toEndOf="parent"
         app:layout_constraintStart_toStartOf="parent"
         app:layout_constraintTop_toBottomOf="@+id/profile_name"
-        app:layout_constraintVertical_bias="0.3"/>
+        app:layout_constraintVertical_bias="0.5"/>
 
 
 

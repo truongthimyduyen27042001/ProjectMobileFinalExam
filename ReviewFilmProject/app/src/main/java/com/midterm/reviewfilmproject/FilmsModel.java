@@ -3,6 +3,7 @@ package com.midterm.reviewfilmproject;
 import java.io.Serializable;
 
 public class FilmsModel implements Serializable {
+
     String name;
     String img_url;
     String type;

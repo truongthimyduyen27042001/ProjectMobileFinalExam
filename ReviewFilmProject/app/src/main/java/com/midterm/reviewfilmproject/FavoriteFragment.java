@@ -57,12 +57,12 @@ public class FavoriteFragment extends Fragment {
         myFavoriteAdapter = new MyFavoriteAdapter(getActivity(),filmsModelList);
         recyclerView.setAdapter(myFavoriteAdapter);
 
-        db.collection("AddToFavorite").get().addOnCompleteListener(new OnCompleteListener<QuerySnapshot>() {
+        db.collection("AddToFavorite").document(auth.getCurrentUser().getUid())
+            .collection("CurrentUser").get().addOnCompleteListener(new OnCompleteListener<QuerySnapshot>() {
             @Override
             public void onComplete(@NonNull Task<QuerySnapshot> task) {
                 if(task.isSuccessful()){
                     for(DocumentSnapshot documentSnapshot : task.getResult().getDocuments()){
-
                         String documentId = documentSnapshot.getId();
                         FilmsModel filmsModel = documentSnapshot.toObject(FilmsModel.class);
                         filmsModel.setDocumentId(documentId);

@@ -1,5 +1,7 @@
 package com.midterm.reviewfilmproject;
 
+import java.util.List;
+
 public class UserModel {
     String name;
     String email;
@@ -14,12 +16,12 @@ public class UserModel {
         this.profileImg = profileImg;
     }
 
-    public UserModel(String name, String email, String password) {
+    public UserModel(String name, String email, String password, String profileImg) {
         this.name = name;
         this.email = email;
         this.password = password;
+        this.profileImg = profileImg;
     }
-
     public UserModel() {
     }
 
