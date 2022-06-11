@@ -128,17 +128,27 @@
 
     <androidx.appcompat.widget.AppCompatButton
         android:id="@+id/play"
-        android:layout_width="350dp"
+        android:layout_width="150dp"
         android:layout_height="wrap_content"
+        android:background="@drawable/btn_buy"
         android:text="PLAY"
         android:textAlignment="center"
         android:textSize="30sp"
         android:textStyle="bold"
-        android:background="@drawable/btn_buy"
-        app:layout_constraintBottom_toBottomOf="parent"
+        android:layout_marginEnd="40dp"
+        android:layout_marginTop="10dp"
         app:layout_constraintEnd_toEndOf="parent"
-        app:layout_constraintStart_toStartOf="parent"
         app:layout_constraintTop_toTopOf="@+id/relativeLayout" />
+
+    <ImageButton
+        android:id="@+id/favorite"
+        android:layout_width="40dp"
+        android:layout_height="40dp"
+        android:layout_marginLeft="40dp"
+        android:layout_marginTop="10dp"
+        android:background="@drawable/ic_baseline_shadow_favorite_24"
+        app:layout_constraintStart_toStartOf="@+id/relativeLayout"
+        app:layout_constraintTop_toTopOf="@+id/relativeLayout"></ImageButton>
 
 
 
