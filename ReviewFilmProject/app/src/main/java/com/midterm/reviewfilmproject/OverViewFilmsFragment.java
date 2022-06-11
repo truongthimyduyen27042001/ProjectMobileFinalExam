@@ -10,7 +10,6 @@ import android.widget.Toast;
 
 import androidx.annotation.NonNull;
 import androidx.fragment.app.Fragment;
-import androidx.fragment.app.FragmentManager;
 import androidx.recyclerview.widget.LinearLayoutManager;
 import androidx.recyclerview.widget.RecyclerView;
 
@@ -46,6 +45,8 @@ public class OverViewFilmsFragment extends Fragment {
     FirebaseFirestore db;
     // Action film
 
+    List<FilmsModel> filmsModelListTrend;
+    FilmsAdapter filmsAdapterTrend;
     List<FilmsModel> filmsModelList;
     FilmsAdapter filmsAdapter;
     List<FilmsModel> filmsModelList2;
@@ -61,12 +62,12 @@ public class OverViewFilmsFragment extends Fragment {
     @Override
     public View onCreateView(LayoutInflater inflater, ViewGroup container,
                              Bundle savedInstanceState) {
-
-
         // Inflate the layout for this fragment
         binding = FragmentOverViewFilmsBinding.inflate(inflater, container, false);
         View view = binding.getRoot();
         db = FirebaseFirestore.getInstance();
+
+        TrendRec = binding.rcvFilmsTrend;
         ActionRec = binding.rcvActionFilms;
         AnimeRec = binding.rcvAnimeFilms;
         RomanRec = binding.rcvRomanticFilms;
@@ -82,6 +83,11 @@ public class OverViewFilmsFragment extends Fragment {
 //        actionFilmsModelList = new ArrayList<>();
 //        actionFilmsAdapter = new ActionFilmsAdapter(getActivity(),actionFilmsModelList);
 //        ActionRec.setAdapter(actionFilmsAdapter);
+
+        TrendRec.setLayoutManager(new LinearLayoutManager(getActivity(), RecyclerView.HORIZONTAL, false));
+        filmsModelListTrend = new ArrayList<>();
+        filmsAdapterTrend = new FilmsAdapter(getActivity(), filmsModelListTrend);
+        TrendRec.setAdapter(filmsAdapterTrend);
 
         ActionRec.setLayoutManager(new LinearLayoutManager(getActivity(),RecyclerView.HORIZONTAL,false));
         filmsModelList = new ArrayList<>();
@@ -107,7 +113,7 @@ public class OverViewFilmsFragment extends Fragment {
         filmsModelList5 = new ArrayList<>();
         filmsAdapter5 = new FilmTrendAdapter(getActivity(),filmsModelList5);
         TrendRec.setAdapter(filmsAdapter5);
-
+      
         db.collection("Films").whereEqualTo("type", "Action movie")
                 .get()
                 .addOnCompleteListener(new OnCompleteListener<QuerySnapshot>() {
@@ -199,19 +205,6 @@ public class OverViewFilmsFragment extends Fragment {
 
 
         //set event for choice actions film
-        binding.viewAllAction.setOnClickListener(new View.OnClickListener() {
-            @Override
-            public void onClick(View view) {
-                SpecificFilmsFragment specificFilmsFragment = new SpecificFilmsFragment();
-                FragmentManager fragmentManager = getActivity().getSupportFragmentManager();
-
-                fragmentManager.beginTransaction()
-                        .replace(R.id.fragmentContainerView, specificFilmsFragment, null)
-                        .setReorderingAllowed(true)
-                        .addToBackStack(null) // name can be null
-                        .commit();
-            }
-        });
 
         return view;
     }

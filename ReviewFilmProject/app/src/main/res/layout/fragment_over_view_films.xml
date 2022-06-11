@@ -14,7 +14,8 @@
         android:id="@+id/scroll_view"
         android:layout_width="match_parent"
         android:layout_height="wrap_content"
-        android:orientation="vertical">
+        android:orientation="vertical"
+        android:layout_marginBottom="30dp">
 
         <LinearLayout
             android:layout_width="match_parent"
@@ -30,11 +31,13 @@
                 tools:context=".MainActivity">
 
                 <TextView
-                    android:layout_width="match_parent"
+                    android:layout_width="374dp"
                     android:layout_height="wrap_content"
                     android:layout_marginBottom="10dp"
                     android:text="Xu Hướng"
+                    android:textColor="@color/colorAccent"
                     android:textSize="17dp"
+                    android:layout_marginLeft="10dp"
                     android:textStyle="bold"></TextView>
 
                 <LinearLayout
@@ -68,20 +71,11 @@
                         android:layout_height="wrap_content"
                         android:layout_weight="1"
                         android:text="Hành động"
+                        android:textColor="@color/colorAccent"
                         android:textSize="18sp"
                         android:textStyle="bold"></TextView>
 
-                    <TextView
-                        android:id="@+id/view_all_action"
-                        android:layout_width="match_parent"
-                        android:layout_height="wrap_content"
-                        android:layout_marginRight="7dp"
-                        android:layout_weight="1"
-                        android:gravity="end"
-                        android:text="View All"
-                        android:textColor="@color/colorPrimary"
-                        android:textSize="18sp"
-                        android:textStyle="bold"></TextView>
+
                 </LinearLayout>
 
                 <androidx.recyclerview.widget.RecyclerView
@@ -111,20 +105,11 @@
                         android:layout_height="wrap_content"
                         android:layout_weight="1"
                         android:text="Lãng Mạn"
+                        android:textColor="@color/colorAccent"
                         android:textSize="18sp"
                         android:textStyle="bold"></TextView>
 
-                    <TextView
-                        android:id="@+id/view_all_romantic"
-                        android:layout_width="match_parent"
-                        android:layout_height="wrap_content"
-                        android:layout_marginRight="7dp"
-                        android:layout_weight="1"
-                        android:gravity="end"
-                        android:text="View All"
-                        android:textColor="@color/colorPrimary"
-                        android:textSize="18sp"
-                        android:textStyle="bold"></TextView>
+
                 </LinearLayout>
 
                 <androidx.recyclerview.widget.RecyclerView
@@ -154,20 +139,11 @@
                         android:layout_height="wrap_content"
                         android:layout_weight="1"
                         android:text="Kinh Dị"
+                        android:textColor="@color/colorAccent"
                         android:textSize="18sp"
                         android:textStyle="bold"></TextView>
 
-                    <TextView
-                        android:id="@+id/view_all_horror"
-                        android:layout_width="match_parent"
-                        android:layout_height="wrap_content"
-                        android:layout_marginRight="7dp"
-                        android:layout_weight="1"
-                        android:gravity="end"
-                        android:text="View All"
-                        android:textColor="@color/colorPrimary"
-                        android:textSize="18sp"
-                        android:textStyle="bold"></TextView>
+
                 </LinearLayout>
 
                 <androidx.recyclerview.widget.RecyclerView
@@ -197,20 +173,10 @@
                         android:layout_height="wrap_content"
                         android:layout_weight="1"
                         android:text="Anime"
+                        android:textColor="@color/colorAccent"
                         android:textSize="18sp"
                         android:textStyle="bold"></TextView>
 
-                    <TextView
-                        android:id="@+id/view_all_Anime"
-                        android:layout_width="match_parent"
-                        android:layout_height="wrap_content"
-                        android:layout_marginRight="7dp"
-                        android:layout_weight="1"
-                        android:gravity="end"
-                        android:text="View All"
-                        android:textColor="@color/colorPrimary"
-                        android:textSize="18sp"
-                        android:textStyle="bold"></TextView>
                 </LinearLayout>
 
                 <androidx.recyclerview.widget.RecyclerView
