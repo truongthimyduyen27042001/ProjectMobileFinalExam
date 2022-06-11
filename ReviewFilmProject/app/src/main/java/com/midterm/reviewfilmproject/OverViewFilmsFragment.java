@@ -1,9 +1,12 @@
 package com.midterm.reviewfilmproject;
 
 import android.os.Bundle;
+import android.text.Editable;
+import android.text.TextWatcher;
 import android.view.LayoutInflater;
 import android.view.View;
 import android.view.ViewGroup;
+import android.widget.EditText;
 import android.widget.ProgressBar;
 import android.widget.ScrollView;
 import android.widget.Toast;
@@ -15,6 +18,7 @@ import androidx.recyclerview.widget.RecyclerView;
 
 import com.google.android.gms.tasks.OnCompleteListener;
 import com.google.android.gms.tasks.Task;
+import com.google.firebase.firestore.DocumentSnapshot;
 import com.google.firebase.firestore.FirebaseFirestore;
 import com.google.firebase.firestore.QueryDocumentSnapshot;
 import com.google.firebase.firestore.QuerySnapshot;
@@ -57,6 +61,12 @@ public class OverViewFilmsFragment extends Fragment {
     FilmsAdapter filmsAdapter4;
     List<FilmsModel> filmsModelList5;
     FilmTrendAdapter filmsAdapter5;
+
+
+    EditText search_box;
+    private List<FilmsModel> filmsModelList1;
+    private RecyclerView recyclerViewSearch;
+    private FilmsAdapter filmsAdapter1;
 
 
     @Override
@@ -204,7 +214,54 @@ public class OverViewFilmsFragment extends Fragment {
 
 
         //set event for choice actions film
+        search_box = binding.searchBox;
+        recyclerViewSearch = binding.searchRec;
+        filmsModelList1 = new ArrayList<>();
+        filmsAdapter1 = new FilmsAdapter(getContext(),filmsModelList1);
+        recyclerViewSearch.setLayoutManager(new LinearLayoutManager(getContext()));
+        recyclerViewSearch.setAdapter(filmsAdapter1);
+        recyclerViewSearch.setHasFixedSize(true);
+        search_box.addTextChangedListener(new TextWatcher() {
+            @Override
+            public void beforeTextChanged(CharSequence charSequence, int i, int i1, int i2) {
+
+            }
+
+            @Override
+            public void onTextChanged(CharSequence charSequence, int i, int i1, int i2) {
+
+            }
+
+            @Override
+            public void afterTextChanged(Editable editable) {
+                if(editable.toString().isEmpty()){
+                    filmsModelList1.clear();
+                    filmsAdapter1.notifyDataSetChanged();
+                }else{
+                    searchFilm(editable.toString());
+                }
+            }
+        });
 
         return view;
+    }
+    private void searchFilm(String film){
+
+        db.collection("Films").whereEqualTo("name",film).get()
+                .addOnCompleteListener(new OnCompleteListener<QuerySnapshot>() {
+                    @Override
+                    public void onComplete(@NonNull Task<QuerySnapshot> task) {
+                        if(task.isSuccessful() && task.getResult() != null){
+                            filmsModelList1.clear();
+                            filmsAdapter1.notifyDataSetChanged();
+                            for(DocumentSnapshot doc : task.getResult().getDocuments()){
+                                FilmsModel filmsModel = doc.toObject(FilmsModel.class);
+
+                                filmsModelList1.add(filmsModel);
+                                filmsAdapter1.notifyDataSetChanged();
+                            }
+                        }
+                    }
+                });
     }
 }

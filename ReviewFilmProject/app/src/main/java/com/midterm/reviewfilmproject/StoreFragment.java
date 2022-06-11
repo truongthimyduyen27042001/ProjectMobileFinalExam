@@ -1,22 +1,38 @@
 package com.midterm.reviewfilmproject;
 
 import android.os.Bundle;
+import android.text.Editable;
+import android.text.TextWatcher;
 import android.view.LayoutInflater;
 import android.view.View;
 import android.view.ViewGroup;
+import android.widget.EditText;
 import android.widget.TextView;
+import android.widget.Toast;
 
+import androidx.annotation.NonNull;
+import androidx.appcompat.widget.SearchView;
 import androidx.core.view.ViewCompat;
 import androidx.fragment.app.Fragment;
 import androidx.fragment.app.FragmentManager;
+import androidx.recyclerview.widget.LinearLayoutManager;
+import androidx.recyclerview.widget.RecyclerView;
 
+import com.google.android.gms.tasks.OnCompleteListener;
+import com.google.android.gms.tasks.Task;
+import com.google.firebase.firestore.DocumentSnapshot;
+import com.google.firebase.firestore.FirebaseFirestore;
+import com.google.firebase.firestore.QuerySnapshot;
+import com.google.firebase.storage.FirebaseStorage;
 import com.midterm.reviewfilmproject.databinding.FragmentStoreBinding;
 
+import java.util.ArrayList;
 import java.util.List;
 
 public class StoreFragment extends Fragment {
 
     private FragmentStoreBinding binding;
+
     public StoreFragment() {
     }
 
@@ -127,6 +143,8 @@ public class StoreFragment extends Fragment {
                         .commit();
             }
         });
+
+
         return view;
     }
     @Override
@@ -134,4 +152,5 @@ public class StoreFragment extends Fragment {
         super.onDestroyView();
         binding = null;
     }
+
 }
