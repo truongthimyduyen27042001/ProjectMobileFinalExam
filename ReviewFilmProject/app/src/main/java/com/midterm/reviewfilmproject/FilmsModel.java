@@ -11,6 +11,16 @@ public class FilmsModel implements Serializable {
     String video;
     Boolean istrending;
 
+    public String getDocumentId() {
+        return documentId;
+    }
+
+    public void setDocumentId(String documentId) {
+        this.documentId = documentId;
+    }
+
+    String documentId;
+
     public FilmsModel() {
     }
 

@@ -9,6 +9,7 @@
         <entry key="..\:/Ky2/git/ProjectMobileFinalExam/ReviewFilmProject/app/src/main/res/drawable/btn_bg.xml" value="0.162" />
         <entry key="..\:/Ky2/git/ProjectMobileFinalExam/ReviewFilmProject/app/src/main/res/drawable/btn_buy.xml" value="0.189" />
         <entry key="..\:/Ky2/git/ProjectMobileFinalExam/ReviewFilmProject/app/src/main/res/drawable/btn_buy_dark.xml" value="0.189" />
+        <entry key="..\:/Ky2/git/ProjectMobileFinalExam/ReviewFilmProject/app/src/main/res/drawable/edittext_bg.xml" value="0.1745" />
         <entry key="..\:/Ky2/git/ProjectMobileFinalExam/ReviewFilmProject/app/src/main/res/drawable/search_icon.xml" value="0.189" />
         <entry key="..\:/Ky2/git/ProjectMobileFinalExam/ReviewFilmProject/app/src/main/res/drawable/star.xml" value="0.1" />
         <entry key="..\:/Ky2/git/ProjectMobileFinalExam/ReviewFilmProject/app/src/main/res/layout/activity_details.xml" value="0.27853260869565216" />
@@ -17,12 +18,16 @@
         <entry key="..\:/Ky2/git/ProjectMobileFinalExam/ReviewFilmProject/app/src/main/res/layout/activity_main2.xml" value="0.20416666666666666" />
         <entry key="..\:/Ky2/git/ProjectMobileFinalExam/ReviewFilmProject/app/src/main/res/layout/activity_play.xml" value="0.20416666666666666" />
         <entry key="..\:/Ky2/git/ProjectMobileFinalExam/ReviewFilmProject/app/src/main/res/layout/fragment_cart.xml" value="0.20416666666666666" />
-        <entry key="..\:/Ky2/git/ProjectMobileFinalExam/ReviewFilmProject/app/src/main/res/layout/fragment_over_view_films.xml" value="0.27853260869565216" />
+        <entry key="..\:/Ky2/git/ProjectMobileFinalExam/ReviewFilmProject/app/src/main/res/layout/fragment_gifts.xml" value="0.20416666666666666" />
+        <entry key="..\:/Ky2/git/ProjectMobileFinalExam/ReviewFilmProject/app/src/main/res/layout/fragment_one.xml" value="0.20416666666666666" />
+        <entry key="..\:/Ky2/git/ProjectMobileFinalExam/ReviewFilmProject/app/src/main/res/layout/fragment_over_view_films.xml" value="0.2059800664451827" />
         <entry key="..\:/Ky2/git/ProjectMobileFinalExam/ReviewFilmProject/app/src/main/res/layout/fragment_profile.xml" value="0.20416666666666666" />
         <entry key="..\:/Ky2/git/ProjectMobileFinalExam/ReviewFilmProject/app/src/main/res/layout/fragment_specific_films.xml" value="0.20416666666666666" />
         <entry key="..\:/Ky2/git/ProjectMobileFinalExam/ReviewFilmProject/app/src/main/res/layout/fragment_store.xml" value="0.20416666666666666" />
+        <entry key="..\:/Ky2/git/ProjectMobileFinalExam/ReviewFilmProject/app/src/main/res/layout/fragment_two.xml" value="0.20416666666666666" />
         <entry key="..\:/Ky2/git/ProjectMobileFinalExam/ReviewFilmProject/app/src/main/res/layout/item_film_trend.xml" value="0.33" />
         <entry key="..\:/Ky2/git/ProjectMobileFinalExam/ReviewFilmProject/app/src/main/res/layout/itemfilm.xml" value="0.20416666666666666" />
+        <entry key="..\:/Ky2/git/ProjectMobileFinalExam/ReviewFilmProject/app/src/main/res/layout/my_favorite_item.xml" value="0.20416666666666666" />
         <entry key="..\:/Ky2/git/ProjectMobileFinalExam/ReviewFilmProject/app/src/main/res/menu/navigation.xml" value="0.15925925925925927" />
         <entry key="..\:/Users/acer/Desktop/ProjectMobileFinalExam/ReviewFilmProject/app/src/main/res/drawable-v24/ic_launcher_foreground.xml" value="0.1" />
         <entry key="..\:/Users/acer/Desktop/ProjectMobileFinalExam/ReviewFilmProject/app/src/main/res/drawable/ic_facebook.xml" value="0.1" />

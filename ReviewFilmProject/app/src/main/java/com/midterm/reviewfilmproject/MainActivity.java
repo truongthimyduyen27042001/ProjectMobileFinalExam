@@ -45,7 +45,7 @@ public class MainActivity extends AppCompatActivity {
                     return true;
                 case R.id.navigation_gifts:
                     toolbar.setTitle("My Favorite Films");
-                    fragment = new GiftsFragment();
+                    fragment = new FavoriteFragment();
                     loadFragment(fragment);
                     return true;
                 case R.id.navigation_profile:
