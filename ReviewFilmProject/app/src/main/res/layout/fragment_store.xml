@@ -11,7 +11,7 @@
         android:layout_width="match_parent"
         android:layout_height="match_parent"
         android:orientation="vertical"
-        android:layout_marginTop="105dp"
+        android:layout_marginTop="50dp"
         tools:ignore="MissingConstraints">
 
         <androidx.fragment.app.FragmentContainerView
@@ -91,18 +91,7 @@
                 </TableRow>
             </LinearLayout>
         </LinearLayout>
-        <LinearLayout
-            android:layout_width="match_parent"
-            android:layout_height="wrap_content">
-            <androidx.appcompat.widget.SearchView
-                android:layout_width="match_parent"
-                android:layout_height="wrap_content"
-                app:defaultQueryHint="Search Film"
-                android:background="@drawable/bg_search"
-                app:queryHint="Search film">
 
-            </androidx.appcompat.widget.SearchView>
-        </LinearLayout>
     </androidx.appcompat.widget.LinearLayoutCompat>
 
 

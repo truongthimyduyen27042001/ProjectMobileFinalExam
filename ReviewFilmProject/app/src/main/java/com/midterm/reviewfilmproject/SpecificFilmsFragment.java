@@ -1,9 +1,12 @@
 package com.midterm.reviewfilmproject;
 
 import android.os.Bundle;
+import android.text.Editable;
+import android.text.TextWatcher;
 import android.view.LayoutInflater;
 import android.view.View;
 import android.view.ViewGroup;
+import android.widget.EditText;
 import android.widget.Toast;
 
 import androidx.annotation.NonNull;
@@ -14,6 +17,7 @@ import androidx.recyclerview.widget.RecyclerView;
 
 import com.google.android.gms.tasks.OnCompleteListener;
 import com.google.android.gms.tasks.Task;
+import com.google.firebase.firestore.DocumentSnapshot;
 import com.google.firebase.firestore.FirebaseFirestore;
 import com.google.firebase.firestore.QueryDocumentSnapshot;
 import com.google.firebase.firestore.QuerySnapshot;
@@ -32,6 +36,13 @@ public class SpecificFilmsFragment extends Fragment {
     FilmTrendAdapter filmsAdapter5;
     FirebaseFirestore db;
     int type;
+
+
+//  Search boxxxxxxxxxxx
+    EditText search_box;
+    private List<FilmsModel> filmsModelList1;
+    private RecyclerView recyclerViewSearch;
+    private FilmsAdapter filmsAdapter1;
 
     public SpecificFilmsFragment() {
     }
@@ -61,6 +72,17 @@ public class SpecificFilmsFragment extends Fragment {
         }
 
         listFilms = new ArrayList<FilmsModel>();
+
+//        Search boxxxxxxxxx
+        search_box = binding.searchBox;
+        recyclerViewSearch = binding.searchRec;
+        filmsModelList1 = new ArrayList<>();
+        filmsAdapter1 = new FilmsAdapter(getContext(),filmsModelList1);
+        recyclerViewSearch.setLayoutManager(new LinearLayoutManager(getContext()));
+        recyclerViewSearch.setAdapter(filmsAdapter1);
+        recyclerViewSearch.setHasFixedSize(true);
+
+
         db= FirebaseFirestore.getInstance();
         if (type==1) {
             binding.typeOfFilm.setText("Hành động");
@@ -97,6 +119,43 @@ public class SpecificFilmsFragment extends Fragment {
                             }
                         }
                     });
+
+            search_box.addTextChangedListener(new TextWatcher() {
+                @Override
+                public void beforeTextChanged(CharSequence charSequence, int i, int i1, int i2) {
+
+                }
+
+                @Override
+                public void onTextChanged(CharSequence charSequence, int i, int i1, int i2) {
+
+                }
+
+                @Override
+                public void afterTextChanged(Editable editable) {
+                    if(editable.toString().isEmpty()){
+                        filmsModelList1.clear();
+                        filmsAdapter1.notifyDataSetChanged();
+                    }else{
+                        db.collection("Films").whereEqualTo("type","Action movie").whereEqualTo("name",editable.toString()).get()
+                                .addOnCompleteListener(new OnCompleteListener<QuerySnapshot>() {
+                                    @Override
+                                    public void onComplete(@NonNull Task<QuerySnapshot> task) {
+                                        if(task.isSuccessful() && task.getResult() != null){
+                                            filmsModelList1.clear();
+                                            filmsAdapter1.notifyDataSetChanged();
+                                            for(DocumentSnapshot doc : task.getResult().getDocuments()){
+                                                FilmsModel filmsModel = doc.toObject(FilmsModel.class);
+
+                                                filmsModelList1.add(filmsModel);
+                                                filmsAdapter1.notifyDataSetChanged();
+                                            }
+                                        }
+                                    }
+                                });
+                    }
+                }
+            });
         }
         else if (type==2) {
             binding.typeOfFilm.setText("Lãng mạn");
@@ -132,6 +191,43 @@ public class SpecificFilmsFragment extends Fragment {
                             }
                         }
                     });
+
+            search_box.addTextChangedListener(new TextWatcher() {
+                @Override
+                public void beforeTextChanged(CharSequence charSequence, int i, int i1, int i2) {
+
+                }
+
+                @Override
+                public void onTextChanged(CharSequence charSequence, int i, int i1, int i2) {
+
+                }
+
+                @Override
+                public void afterTextChanged(Editable editable) {
+                    if(editable.toString().isEmpty()){
+                        filmsModelList1.clear();
+                        filmsAdapter1.notifyDataSetChanged();
+                    }else{
+                        db.collection("Films").whereEqualTo("type","Romantic movie").whereEqualTo("name",editable.toString()).get()
+                                .addOnCompleteListener(new OnCompleteListener<QuerySnapshot>() {
+                                    @Override
+                                    public void onComplete(@NonNull Task<QuerySnapshot> task) {
+                                        if(task.isSuccessful() && task.getResult() != null){
+                                            filmsModelList1.clear();
+                                            filmsAdapter1.notifyDataSetChanged();
+                                            for(DocumentSnapshot doc : task.getResult().getDocuments()){
+                                                FilmsModel filmsModel = doc.toObject(FilmsModel.class);
+
+                                                filmsModelList1.add(filmsModel);
+                                                filmsAdapter1.notifyDataSetChanged();
+                                            }
+                                        }
+                                    }
+                                });
+                    }
+                }
+            });
         }
         else if (type==3) {
             binding.typeOfFilm.setText("Kinh dị");
@@ -169,6 +265,43 @@ public class SpecificFilmsFragment extends Fragment {
                             }
                         }
                     });
+
+            search_box.addTextChangedListener(new TextWatcher() {
+                @Override
+                public void beforeTextChanged(CharSequence charSequence, int i, int i1, int i2) {
+
+                }
+
+                @Override
+                public void onTextChanged(CharSequence charSequence, int i, int i1, int i2) {
+
+                }
+
+                @Override
+                public void afterTextChanged(Editable editable) {
+                    if(editable.toString().isEmpty()){
+                        filmsModelList1.clear();
+                        filmsAdapter1.notifyDataSetChanged();
+                    }else{
+                        db.collection("Films").whereEqualTo("type","Horror movie").whereEqualTo("name",editable.toString()).get()
+                                .addOnCompleteListener(new OnCompleteListener<QuerySnapshot>() {
+                                    @Override
+                                    public void onComplete(@NonNull Task<QuerySnapshot> task) {
+                                        if(task.isSuccessful() && task.getResult() != null){
+                                            filmsModelList1.clear();
+                                            filmsAdapter1.notifyDataSetChanged();
+                                            for(DocumentSnapshot doc : task.getResult().getDocuments()){
+                                                FilmsModel filmsModel = doc.toObject(FilmsModel.class);
+
+                                                filmsModelList1.add(filmsModel);
+                                                filmsAdapter1.notifyDataSetChanged();
+                                            }
+                                        }
+                                    }
+                                });
+                    }
+                }
+            });
         }
         else if (type==4) {
             binding.typeOfFilm.setText("Anime");
@@ -205,6 +338,43 @@ public class SpecificFilmsFragment extends Fragment {
                             }
                         }
                     });
+
+            search_box.addTextChangedListener(new TextWatcher() {
+                @Override
+                public void beforeTextChanged(CharSequence charSequence, int i, int i1, int i2) {
+
+                }
+
+                @Override
+                public void onTextChanged(CharSequence charSequence, int i, int i1, int i2) {
+
+                }
+
+                @Override
+                public void afterTextChanged(Editable editable) {
+                    if(editable.toString().isEmpty()){
+                        filmsModelList1.clear();
+                        filmsAdapter1.notifyDataSetChanged();
+                    }else{
+                        db.collection("Films").whereEqualTo("type","Anime movie").whereEqualTo("name",editable.toString()).get()
+                                .addOnCompleteListener(new OnCompleteListener<QuerySnapshot>() {
+                                    @Override
+                                    public void onComplete(@NonNull Task<QuerySnapshot> task) {
+                                        if(task.isSuccessful() && task.getResult() != null){
+                                            filmsModelList1.clear();
+                                            filmsAdapter1.notifyDataSetChanged();
+                                            for(DocumentSnapshot doc : task.getResult().getDocuments()){
+                                                FilmsModel filmsModel = doc.toObject(FilmsModel.class);
+
+                                                filmsModelList1.add(filmsModel);
+                                                filmsAdapter1.notifyDataSetChanged();
+                                            }
+                                        }
+                                    }
+                                });
+                    }
+                }
+            });
         }
         filmAdapter = new FilmsAdapter(getActivity(),listFilms);
         binding.rcvActionFilms.setLayoutManager(new GridLayoutManager(getContext(),2));

@@ -21,6 +21,7 @@ import com.google.firebase.auth.FirebaseAuth;
 import com.google.firebase.firestore.DocumentReference;
 import com.google.firebase.firestore.DocumentSnapshot;
 import com.google.firebase.firestore.FirebaseFirestore;
+import com.google.firebase.firestore.QueryDocumentSnapshot;
 import com.google.firebase.firestore.QuerySnapshot;
 
 import java.util.ArrayList;
@@ -86,9 +87,12 @@ public class DetailsActivity extends AppCompatActivity {
                         FilmsModel filmsModel = documentSnapshot.toObject(FilmsModel.class);
                         filmsModel.setDocumentId(documentId);
                         filmsModelList.add(filmsModel.getName());
+//                        if(filmsModelList.contains(filmsModel.getName())){
+//                            addToFavorite.setBackgroundResource(R.drawable.ic_baseline_red_favorite_24);
+//                        }else{
+//                            addToFavorite.setBackgroundResource(R.drawable.ic_baseline_shadow_favorite_24);
+//                        }
                     }
-
-                    Log.d("OK",filmsModelList.toString());
                 }
             }
         });
@@ -97,11 +101,11 @@ public class DetailsActivity extends AppCompatActivity {
         addToFavorite.setOnClickListener(new View.OnClickListener() {
             @Override
             public void onClick(View view) {
-                addToFav();
                 addToFavorite.setBackgroundResource(R.drawable.ic_baseline_red_favorite_24);
+                addToFav();
             }
         });
-        Log.d("ok",filmsModelList.toString());
+
     }
 
     private void addToFav() {
@@ -115,15 +119,16 @@ public class DetailsActivity extends AppCompatActivity {
         fvr.put("isTrending",filmsModel.getIstrending());
 
         if(filmsModelList.contains(filmsModel.getName())){
-            Toast.makeText(DetailsActivity.this, "Ton Tai Phim", Toast.LENGTH_SHORT).show();
+            Toast.makeText(DetailsActivity.this, "exist", Toast.LENGTH_SHORT).show();
         }else{
             filmsModelList.add(filmsModel.getName());
+            Log.d("OK",filmsModelList.toString());
             firestore.collection("AddToFavorite").document(auth.getCurrentUser().getUid())
                     .collection("CurrentUser").add(fvr).addOnCompleteListener(new OnCompleteListener<DocumentReference>() {
                 @Override
                 public void onComplete(@NonNull Task<DocumentReference> task) {
                     Toast.makeText(DetailsActivity.this, "Add to Favorite", Toast.LENGTH_SHORT).show();
-                    finish();
+//                    finish();
                 }
             });
         }
